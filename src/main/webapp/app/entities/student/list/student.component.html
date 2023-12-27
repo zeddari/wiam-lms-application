@@ -1,0 +1,226 @@
+<div>
+  <h2 id="page-heading" data-cy="StudentHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.student.home.title">Students</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.student.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-student"
+        [routerLink]="['/student/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.student.home.createLabel">Create a new Student</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.student.home.search"
+          >Search for Student</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.student.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (students?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.student.home.notFound">No Students found</span>
+    </div>
+  }
+
+  @if (students && students.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.phoneNumber">Phone Number</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mobileNumber">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.mobileNumber">Mobile Number</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="about">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.about">About</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imageLink">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.imageLink">Image Link</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.code">Code</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthdate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.birthdate">Birthdate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastDegree">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.lastDegree">Last Degree</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userCustom.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.userCustom">User Custom</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="group2.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.group2">Group 2</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="country.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.student.country">Country</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (student of students; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/student', student.id, 'view']">{{ student.id }}</a>
+              </td>
+              <td>{{ student.phoneNumber }}</td>
+              <td>{{ student.mobileNumber }}</td>
+              <td>{{ student.gender }}</td>
+              <td>{{ student.about }}</td>
+              <td>
+                @if (student.imageLink) {
+                  <a (click)="openFile(student.imageLink, student.imageLinkContentType)">
+                    <img
+                      [src]="'data:' + student.imageLinkContentType + ';base64,' + student.imageLink"
+                      style="max-height: 30px"
+                      alt="student image"
+                    />
+                  </a>
+                  <span>{{ student.imageLinkContentType }}, {{ byteSize(student.imageLink) }}</span>
+                }
+              </td>
+              <td>{{ student.code }}</td>
+              <td>{{ student.birthdate | formatMediumDate }}</td>
+              <td>{{ student.lastDegree }}</td>
+              <td>
+                @if (student.userCustom) {
+                  <div>
+                    <a [routerLink]="['/user-custom', student.userCustom.id, 'view']">{{ student.userCustom.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (student.group2) {
+                  <div>
+                    <a [routerLink]="['/group', student.group2.id, 'view']">{{ student.group2.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (student.country) {
+                  <div>
+                    <a [routerLink]="['/country', student.country.id, 'view']">{{ student.country.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/student', student.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/student', student.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(student)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,386 @@
+<div>
+  <h2 id="page-heading" data-cy="UserCustomHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.userCustom.home.title">User Customs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.userCustom.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-user-custom"
+        [routerLink]="['/user-custom/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.userCustom.home.createLabel">Create a new User Custom</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.userCustom.home.search"
+          >Search for User Custom</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.userCustom.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (userCustoms?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.userCustom.home.notFound">No User Customs found</span>
+    </div>
+  }
+
+  @if (userCustoms && userCustoms.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.id">Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstName">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.firstName">First Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastName">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.lastName">Last Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.email">Email</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="accountName">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.accountName">Account Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="role">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.role">Role</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="password">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.password">Password</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber1">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.phoneNumber1">Phone Number 1</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumver2">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.phoneNumver2">Phone Numver 2</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sex">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.sex">Sex</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="countryInternalId">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.countryInternalId">Country Internal Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nationalityId">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.nationalityId">Nationality Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthDay">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.birthDay">Birth Day</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="photo">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.photo">Photo</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.address">Address</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="facebook">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.facebook">Facebook</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telegramUserCustomId">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.telegramUserCustomId">Telegram User Custom Id</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telegramUserCustomName">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.telegramUserCustomName">Telegram User Custom Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="biography">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.biography">Biography</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bankAccountDetails">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.bankAccountDetails">Bank Account Details</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="certificate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.certificate">Certificate</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="jobInternalId">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.jobInternalId">Job Internal Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="creationDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.creationDate">Creation Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="modificationDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.modificationDate">Modification Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletionDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.deletionDate">Deletion Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="country.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.country">Country</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="job.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.job">Job</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="exam.studentName">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.userCustom.exam">Exam</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (userCustom of userCustoms; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/user-custom', userCustom.id, 'view']">{{ userCustom.id }}</a>
+              </td>
+              <td>{{ userCustom.firstName }}</td>
+              <td>{{ userCustom.lastName }}</td>
+              <td>{{ userCustom.email }}</td>
+              <td>{{ userCustom.accountName }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.Role.' + userCustom.role }}">{{ userCustom.role }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.AccountStatus.' + userCustom.status }}">{{ userCustom.status }}</td>
+              <td>{{ userCustom.password }}</td>
+              <td>{{ userCustom.phoneNumber1 }}</td>
+              <td>{{ userCustom.phoneNumver2 }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.Sex.' + userCustom.sex }}">{{ userCustom.sex }}</td>
+              <td>{{ userCustom.countryInternalId }}</td>
+              <td>{{ userCustom.nationalityId }}</td>
+              <td>{{ userCustom.birthDay | formatMediumDate }}</td>
+              <td>
+                @if (userCustom.photo) {
+                  <a (click)="openFile(userCustom.photo, userCustom.photoContentType)">
+                    <img
+                      [src]="'data:' + userCustom.photoContentType + ';base64,' + userCustom.photo"
+                      style="max-height: 30px"
+                      alt="userCustom image"
+                    />
+                  </a>
+                  <span>{{ userCustom.photoContentType }}, {{ byteSize(userCustom.photo) }}</span>
+                }
+              </td>
+              <td>{{ userCustom.address }}</td>
+              <td>{{ userCustom.facebook }}</td>
+              <td>{{ userCustom.telegramUserCustomId }}</td>
+              <td>{{ userCustom.telegramUserCustomName }}</td>
+              <td>{{ userCustom.biography }}</td>
+              <td>{{ userCustom.bankAccountDetails }}</td>
+              <td>
+                @if (userCustom.certificate) {
+                  <a (click)="openFile(userCustom.certificate, userCustom.certificateContentType)">
+                    <img
+                      [src]="'data:' + userCustom.certificateContentType + ';base64,' + userCustom.certificate"
+                      style="max-height: 30px"
+                      alt="userCustom image"
+                    />
+                  </a>
+                  <span>{{ userCustom.certificateContentType }}, {{ byteSize(userCustom.certificate) }}</span>
+                }
+              </td>
+              <td>{{ userCustom.jobInternalId }}</td>
+              <td>{{ userCustom.creationDate | formatMediumDatetime }}</td>
+              <td>{{ userCustom.modificationDate | formatMediumDatetime }}</td>
+              <td>{{ userCustom.deletionDate | formatMediumDatetime }}</td>
+              <td>
+                @if (userCustom.country) {
+                  <div>
+                    <a [routerLink]="['/country', userCustom.country.id, 'view']">{{ userCustom.country.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (userCustom.job) {
+                  <div>
+                    <a [routerLink]="['/job', userCustom.job.id, 'view']">{{ userCustom.job.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @for (exam of userCustom.exams; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/exam', exam.id, 'view']">{{ exam.studentName }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/user-custom', userCustom.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/user-custom', userCustom.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(userCustom)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

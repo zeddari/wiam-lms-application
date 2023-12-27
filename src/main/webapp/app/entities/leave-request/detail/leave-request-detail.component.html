@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (leaveRequest) {
+      <div>
+        <h2 data-cy="leaveRequestDetailsHeading">
+          <span jhiTranslate="wiamLmsApplicationApp.leaveRequest.detail.title">Leave Request</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ leaveRequest.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.leaveRequest.title">Title</span></dt>
+          <dd>
+            <span>{{ leaveRequest.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.leaveRequest.from">From</span></dt>
+          <dd>
+            <span>{{ leaveRequest.from | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.leaveRequest.toDate">To Date</span></dt>
+          <dd>
+            <span>{{ leaveRequest.toDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.leaveRequest.details">Details</span></dt>
+          <dd>
+            <span>{{ leaveRequest.details }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/leave-request', leaveRequest.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

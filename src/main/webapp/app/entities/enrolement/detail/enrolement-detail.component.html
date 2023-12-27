@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (enrolement) {
+      <div>
+        <h2 data-cy="enrolementDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.enrolement.detail.title">Enrolement</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ enrolement.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.enrolement.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ enrolement.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.enrolement.activatedAt">Activated At</span></dt>
+          <dd>
+            <span>{{ enrolement.activatedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.enrolement.activatedBy">Activated By</span></dt>
+          <dd>
+            <span>{{ enrolement.activatedBy | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.enrolement.enrolmentStartTime">Enrolment Start Time</span></dt>
+          <dd>
+            <span>{{ enrolement.enrolmentStartTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.enrolement.enrolemntEndTime">Enrolemnt End Time</span></dt>
+          <dd>
+            <span>{{ enrolement.enrolemntEndTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.enrolement.student">Student</span></dt>
+          <dd>
+            @if (enrolement.student) {
+              <div>
+                <a [routerLink]="['/student', enrolement.student.id, 'view']">{{ enrolement.student.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.enrolement.course">Course</span></dt>
+          <dd>
+            @if (enrolement.course) {
+              <div>
+                <a [routerLink]="['/course', enrolement.course.id, 'view']">{{ enrolement.course.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/enrolement', enrolement.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

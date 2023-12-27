@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (quizCertificate) {
+      <div>
+        <h2 data-cy="quizCertificateDetailsHeading">
+          <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.detail.title">Quiz Certificate</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ quizCertificate.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.title">Title</span></dt>
+          <dd>
+            <span>{{ quizCertificate.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.description">Description</span></dt>
+          <dd>
+            <span>{{ quizCertificate.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ quizCertificate.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.students">Students</span></dt>
+          <dd>
+            @for (students of quizCertificate.students; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/student', students.id, 'view']">{{ students.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.questions">Questions</span></dt>
+          <dd>
+            @for (questions of quizCertificate.questions; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/question', questions.id, 'view']">{{ questions.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.part">Part</span></dt>
+          <dd>
+            @if (quizCertificate.part) {
+              <div>
+                <a [routerLink]="['/part', quizCertificate.part.id, 'view']">{{ quizCertificate.part.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.session">Session</span></dt>
+          <dd>
+            @if (quizCertificate.session) {
+              <div>
+                <a [routerLink]="['/session', quizCertificate.session.id, 'view']">{{ quizCertificate.session.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.quizCertificate.type">Type</span></dt>
+          <dd>
+            @if (quizCertificate.type) {
+              <div>
+                <a [routerLink]="['/quiz-certificate-type', quizCertificate.type.id, 'view']">{{ quizCertificate.type.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/quiz-certificate', quizCertificate.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

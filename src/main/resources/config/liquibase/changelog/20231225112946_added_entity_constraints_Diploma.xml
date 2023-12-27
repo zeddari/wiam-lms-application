@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Diploma.
+    -->
+    <changeSet id="20231225112946-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_custom_id"
+                                 baseTableName="diploma"
+                                 constraintName="fk_diploma__user_custom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="diploma_type_id"
+                                 baseTableName="diploma"
+                                 constraintName="fk_diploma__diploma_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="diploma_type"
+                                 />
+    </changeSet>
+</databaseChangeLog>

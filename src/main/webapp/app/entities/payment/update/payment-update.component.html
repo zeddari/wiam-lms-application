@@ -1,0 +1,241 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-payment-heading" data-cy="PaymentCreateUpdateHeading" jhiTranslate="wiamLmsApplicationApp.payment.home.createOrEditLabel">
+        Create or edit a Payment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.paymentMethod" for="field_paymentMethod"
+            >Payment Method</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="paymentMethod"
+            id="field_paymentMethod"
+            data-cy="paymentMethod"
+            formControlName="paymentMethod"
+          />
+          @if (editForm.get('paymentMethod')!.invalid && (editForm.get('paymentMethod')!.dirty || editForm.get('paymentMethod')!.touched)) {
+            <div>
+              @if (editForm.get('paymentMethod')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.paiedBy" for="field_paiedBy">Paied By</label>
+          <input type="text" class="form-control" name="paiedBy" id="field_paiedBy" data-cy="paiedBy" formControlName="paiedBy" />
+          @if (editForm.get('paiedBy')!.invalid && (editForm.get('paiedBy')!.dirty || editForm.get('paiedBy')!.touched)) {
+            <div>
+              @if (editForm.get('paiedBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.mode" for="field_mode">Mode</label>
+          <input type="text" class="form-control" name="mode" id="field_mode" data-cy="mode" formControlName="mode" />
+          @if (editForm.get('mode')!.invalid && (editForm.get('mode')!.dirty || editForm.get('mode')!.touched)) {
+            <div>
+              @if (editForm.get('mode')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.poof" for="field_poof">Poof</label>
+          <div>
+            @if (editForm.get('poof')!.value) {
+              <img
+                [src]="'data:' + editForm.get('poofContentType')!.value + ';base64,' + editForm.get('poof')!.value"
+                style="max-height: 100px"
+                alt="payment image"
+              />
+            }
+            @if (editForm.get('poof')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('poofContentType')!.value }}, {{ byteSize(editForm.get('poof')!.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('poof', 'poofContentType', 'file_poof')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_poof"
+              data-cy="poof"
+              (change)="setFileData($event, 'poof', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="poof" id="field_poof" data-cy="poof" formControlName="poof" />
+          <input type="hidden" class="form-control" name="poofContentType" id="field_poofContentType" formControlName="poofContentType" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.paidAt" for="field_paidAt">Paid At</label>
+          <div class="d-flex">
+            <input
+              id="field_paidAt"
+              data-cy="paidAt"
+              type="datetime-local"
+              class="form-control"
+              name="paidAt"
+              formControlName="paidAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('paidAt')!.invalid && (editForm.get('paidAt')!.dirty || editForm.get('paidAt')!.touched)) {
+            <div>
+              @if (editForm.get('paidAt')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('paidAt')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.amount" for="field_amount">Amount</label>
+          <input type="text" class="form-control" name="amount" id="field_amount" data-cy="amount" formControlName="amount" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.PaymentType.null' | translate }}</option>
+            @for (paymentType of paymentTypeValues; track $index) {
+              <option [value]="paymentType">{{ 'wiamLmsApplicationApp.PaymentType.' + paymentType | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)) {
+            <div>
+              @if (editForm.get('type')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.fromMonth" for="field_fromMonth">From Month</label>
+          <input type="number" class="form-control" name="fromMonth" id="field_fromMonth" data-cy="fromMonth" formControlName="fromMonth" />
+          @if (editForm.get('fromMonth')!.invalid && (editForm.get('fromMonth')!.dirty || editForm.get('fromMonth')!.touched)) {
+            <div>
+              @if (editForm.get('fromMonth')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('fromMonth')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.toMonth" for="field_toMonth">To Month</label>
+          <input type="number" class="form-control" name="toMonth" id="field_toMonth" data-cy="toMonth" formControlName="toMonth" />
+          @if (editForm.get('toMonth')!.invalid && (editForm.get('toMonth')!.dirty || editForm.get('toMonth')!.touched)) {
+            <div>
+              @if (editForm.get('toMonth')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('toMonth')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.details" for="field_details">Details</label>
+          <textarea class="form-control" name="details" id="field_details" data-cy="details" formControlName="details"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.currency" for="field_currency">Currency</label>
+          <select
+            class="form-control"
+            id="field_currency"
+            data-cy="currency"
+            name="currency"
+            formControlName="currency"
+            [compareWith]="compareCurrency"
+          >
+            <option [ngValue]="null"></option>
+            @for (currencyOption of currenciesSharedCollection; track $index) {
+              <option [ngValue]="currencyOption">{{ currencyOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.payment.enrolment" for="field_enrolment">Enrolment</label>
+          <select
+            class="form-control"
+            id="field_enrolment"
+            data-cy="enrolment"
+            name="enrolment"
+            formControlName="enrolment"
+            [compareWith]="compareEnrolement"
+          >
+            <option [ngValue]="null"></option>
+            @for (enrolementOption of enrolementsSharedCollection; track $index) {
+              <option [ngValue]="enrolementOption">{{ enrolementOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

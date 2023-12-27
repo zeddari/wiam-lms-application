@@ -1,0 +1,112 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-review-heading" data-cy="ReviewCreateUpdateHeading" jhiTranslate="wiamLmsApplicationApp.review.home.createOrEditLabel">
+        Create or edit a Review
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.review.body" for="field_body">Body</label>
+          <input type="text" class="form-control" name="body" id="field_body" data-cy="body" formControlName="body" />
+          @if (editForm.get('body')!.invalid && (editForm.get('body')!.dirty || editForm.get('body')!.touched)) {
+            <div>
+              @if (editForm.get('body')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('body')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.review.rating" for="field_rating">Rating</label>
+          <input type="number" class="form-control" name="rating" id="field_rating" data-cy="rating" formControlName="rating" />
+          @if (editForm.get('rating')!.invalid && (editForm.get('rating')!.dirty || editForm.get('rating')!.touched)) {
+            <div>
+              @if (editForm.get('rating')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }"
+                  >This field should be at least 1.</small
+                >
+              }
+              @if (editForm.get('rating')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: 5 }"
+                  >This field cannot be more than 5.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('rating')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.review.userCustom" for="field_userCustom">User Custom</label>
+          <select
+            class="form-control"
+            id="field_userCustom"
+            data-cy="userCustom"
+            name="userCustom"
+            formControlName="userCustom"
+            [compareWith]="compareUserCustom"
+          >
+            <option [ngValue]="null"></option>
+            @for (userCustomOption of userCustomsSharedCollection; track $index) {
+              <option [ngValue]="userCustomOption">{{ userCustomOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.review.course" for="field_course">Course</label>
+          <select
+            class="form-control"
+            id="field_course"
+            data-cy="course"
+            name="course"
+            formControlName="course"
+            [compareWith]="comparePart"
+          >
+            <option [ngValue]="null"></option>
+            @for (partOption of partsSharedCollection; track $index) {
+              <option [ngValue]="partOption">{{ partOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

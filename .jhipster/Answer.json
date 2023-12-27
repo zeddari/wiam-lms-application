@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20231225113746"
+  },
+  "applications": "*",
+  "entityTableName": "answer",
+  "fields": [
+    {
+      "fieldName": "a1v",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "a2v",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "a3v",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "a4v",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Answer",
+  "relationships": [
+    {
+      "otherEntityName": "question",
+      "relationshipName": "question",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "student",
+      "relationshipName": "student",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+<div>
+  <h2 id="page-heading" data-cy="Question2Heading">
+    <span jhiTranslate="wiamLmsApplicationApp.question2.home.title">Question 2 S</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.question2.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-question-2"
+        [routerLink]="['/question-2/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.question2.home.createLabel">Create a new Question 2</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.question2.home.search"
+          >Search for Question 2</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.question2.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (question2s?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.question2.home.notFound">No Question 2 S found</span>
+    </div>
+  }
+
+  @if (question2s && question2s.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionTitle">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question2.questionTitle">Question Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionType">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question2.questionType">Question Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionDescription">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question2.questionDescription">Question Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionPoint">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question2.questionPoint">Question Point</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionSubject">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question2.questionSubject">Question Subject</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionStatus">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question2.questionStatus">Question Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (question2 of question2s; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/question-2', question2.id, 'view']">{{ question2.id }}</a>
+              </td>
+              <td>{{ question2.questionTitle }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.QuestionType.' + question2.questionType }}">{{ question2.questionType }}</td>
+              <td>{{ question2.questionDescription }}</td>
+              <td>{{ question2.questionPoint }}</td>
+              <td>{{ question2.questionSubject }}</td>
+              <td>{{ question2.questionStatus }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/question-2', question2.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/question-2', question2.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(question2)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

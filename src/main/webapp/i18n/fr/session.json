@@ -1,0 +1,58 @@
+{
+  "wiamLmsApplicationApp": {
+    "session": {
+      "home": {
+        "title": "Sessions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Session",
+        "createOrEditLabel": "Créer ou éditer un Session",
+        "search": "Recherche pour Session",
+        "notFound": "Aucun Session trouvé"
+      },
+      "created": "Un nouveau Session a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Session avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Session avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Session {{ id }} ?"
+      },
+      "detail": {
+        "title": "Session"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "sessionStartTime": "Session Start Time",
+      "sessionEndTime": "Session End Time",
+      "isActive": "Is Active",
+      "sessionSize": "Session Size",
+      "price": "Price",
+      "currency": "Currency",
+      "targetedAge": "Targeted Age",
+      "targetedGender": "Targeted Gender",
+      "thumbnail": "Thumbnail",
+      "planningType": "Planning Type",
+      "onceDate": "Once Date",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sanday": "Sanday",
+      "periodStartDate": "Period Start Date",
+      "periodeEndDate": "Periode End Date",
+      "noPeriodeEndDate": "No Periode End Date",
+      "progression1": "Progression 1",
+      "quizCertificate": "Quiz Certificate",
+      "professors": "Professors",
+      "employees": "Employees",
+      "links": "Links",
+      "classroom": "Classroom",
+      "type": "Type",
+      "mode": "Mode",
+      "part": "Part",
+      "jmode": "Jmode",
+      "group": "Group"
+    }
+  }
+}

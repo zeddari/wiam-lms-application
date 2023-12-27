@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (country) {
+      <div>
+        <h2 data-cy="countryDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.country.detail.title">Country</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ country.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.country.nameAr">Name Ar</span></dt>
+          <dd>
+            <span>{{ country.nameAr }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.country.nameLat">Name Lat</span></dt>
+          <dd>
+            <span>{{ country.nameLat }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.country.code">Code</span></dt>
+          <dd>
+            <span>{{ country.code }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/country', country.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

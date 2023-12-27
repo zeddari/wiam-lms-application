@@ -1,0 +1,180 @@
+<div>
+  <h2 id="page-heading" data-cy="FollowUpHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.followUp.home.title">Follow Ups</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.followUp.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-follow-up"
+        [routerLink]="['/follow-up/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.followUp.home.createLabel">Create a new Follow Up</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.followUp.home.search"
+          >Search for Follow Up</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.followUp.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (followUps?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.followUp.home.notFound">No Follow Ups found</span>
+    </div>
+  }
+
+  @if (followUps && followUps.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fromSourate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.fromSourate">From Sourate</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fromAya">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.fromAya">From Aya</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toSourate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.toSourate">To Sourate</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toAya">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.toAya">To Aya</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tilawaType">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.tilawaType">Tilawa Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notation">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.notation">Notation</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="remarks">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.remarks">Remarks</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="coteryHistory.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.followUp.coteryHistory">Cotery History</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (followUp of followUps; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/follow-up', followUp.id, 'view']">{{ followUp.id }}</a>
+              </td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.Sourate.' + followUp.fromSourate }}">{{ followUp.fromSourate }}</td>
+              <td>{{ followUp.fromAya }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.Sourate.' + followUp.toSourate }}">{{ followUp.toSourate }}</td>
+              <td>{{ followUp.toAya }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.Tilawa.' + followUp.tilawaType }}">{{ followUp.tilawaType }}</td>
+              <td>{{ followUp.notation }}</td>
+              <td>{{ followUp.remarks }}</td>
+              <td>
+                @if (followUp.coteryHistory) {
+                  <div>
+                    <a [routerLink]="['/cotery-history', followUp.coteryHistory.id, 'view']">{{ followUp.coteryHistory.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/follow-up', followUp.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/follow-up', followUp.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(followUp)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

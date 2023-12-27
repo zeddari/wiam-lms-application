@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Language.
+    -->
+    <changeSet id="20231225111346-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_custom_id"
+                                 baseTableName="language"
+                                 constraintName="fk_language__user_custom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_custom"
+                                 />
+    </changeSet>
+</databaseChangeLog>

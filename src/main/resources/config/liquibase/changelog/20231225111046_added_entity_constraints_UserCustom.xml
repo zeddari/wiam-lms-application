@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity UserCustom.
+    -->
+    <changeSet id="20231225111046-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="country_id"
+                                 baseTableName="user_custom"
+                                 constraintName="fk_user_custom__country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="job_id"
+                                 baseTableName="user_custom"
+                                 constraintName="fk_user_custom__job_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_custom_id"
+                                 baseTableName="rel_user_custom__exam"
+                                 constraintName="fk_rel_user_custom__exam__user_custom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="exam_id"
+                                 baseTableName="rel_user_custom__exam"
+                                 constraintName="fk_rel_user_custom__exam__exam_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="exam"
+                                 />
+    </changeSet>
+</databaseChangeLog>

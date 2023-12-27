@@ -1,0 +1,553 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-session-heading" data-cy="SessionCreateUpdateHeading" jhiTranslate="wiamLmsApplicationApp.session.home.createOrEditLabel">
+        Create or edit a Session
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          @if (editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)) {
+            <div>
+              @if (editForm.get('title')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('title')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.sessionStartTime" for="field_sessionStartTime"
+            >Session Start Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_sessionStartTime"
+              data-cy="sessionStartTime"
+              type="datetime-local"
+              class="form-control"
+              name="sessionStartTime"
+              formControlName="sessionStartTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('sessionStartTime')!.invalid &&
+            (editForm.get('sessionStartTime')!.dirty || editForm.get('sessionStartTime')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('sessionStartTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('sessionStartTime')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.sessionEndTime" for="field_sessionEndTime"
+            >Session End Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_sessionEndTime"
+              data-cy="sessionEndTime"
+              type="datetime-local"
+              class="form-control"
+              name="sessionEndTime"
+              formControlName="sessionEndTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('sessionEndTime')!.invalid && (editForm.get('sessionEndTime')!.dirty || editForm.get('sessionEndTime')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('sessionEndTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('sessionEndTime')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.isActive" for="field_isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+          @if (editForm.get('isActive')!.invalid && (editForm.get('isActive')!.dirty || editForm.get('isActive')!.touched)) {
+            <div>
+              @if (editForm.get('isActive')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.sessionSize" for="field_sessionSize">Session Size</label>
+          <input
+            type="number"
+            class="form-control"
+            name="sessionSize"
+            id="field_sessionSize"
+            data-cy="sessionSize"
+            formControlName="sessionSize"
+          />
+          @if (editForm.get('sessionSize')!.invalid && (editForm.get('sessionSize')!.dirty || editForm.get('sessionSize')!.touched)) {
+            <div>
+              @if (editForm.get('sessionSize')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('sessionSize')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('sessionSize')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: 100 }"
+                  >This field cannot be more than 100.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('sessionSize')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.price" for="field_price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+          @if (editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)) {
+            <div>
+              @if (editForm.get('price')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.currency" for="field_currency">Currency</label>
+          <input type="text" class="form-control" name="currency" id="field_currency" data-cy="currency" formControlName="currency" />
+          @if (editForm.get('currency')!.invalid && (editForm.get('currency')!.dirty || editForm.get('currency')!.touched)) {
+            <div>
+              @if (editForm.get('currency')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.targetedAge" for="field_targetedAge">Targeted Age</label>
+          <input
+            type="text"
+            class="form-control"
+            name="targetedAge"
+            id="field_targetedAge"
+            data-cy="targetedAge"
+            formControlName="targetedAge"
+          />
+          @if (editForm.get('targetedAge')!.invalid && (editForm.get('targetedAge')!.dirty || editForm.get('targetedAge')!.touched)) {
+            <div>
+              @if (editForm.get('targetedAge')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.targetedGender" for="field_targetedGender"
+            >Targeted Gender</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="targetedGender"
+            id="field_targetedGender"
+            data-cy="targetedGender"
+            formControlName="targetedGender"
+          />
+          @if (
+            editForm.get('targetedGender')!.invalid && (editForm.get('targetedGender')!.dirty || editForm.get('targetedGender')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('targetedGender')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.thumbnail" for="field_thumbnail">Thumbnail</label>
+          <div>
+            @if (editForm.get('thumbnail')!.value) {
+              <img
+                [src]="'data:' + editForm.get('thumbnailContentType')!.value + ';base64,' + editForm.get('thumbnail')!.value"
+                style="max-height: 100px"
+                alt="session image"
+              />
+            }
+            @if (editForm.get('thumbnail')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('thumbnailContentType')!.value }}, {{ byteSize(editForm.get('thumbnail')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('thumbnail', 'thumbnailContentType', 'file_thumbnail')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_thumbnail"
+              data-cy="thumbnail"
+              (change)="setFileData($event, 'thumbnail', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="thumbnail" id="field_thumbnail" data-cy="thumbnail" formControlName="thumbnail" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="thumbnailContentType"
+            id="field_thumbnailContentType"
+            formControlName="thumbnailContentType"
+          />
+          @if (editForm.get('thumbnail')!.invalid && (editForm.get('thumbnail')!.dirty || editForm.get('thumbnail')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.planningType" for="field_planningType">Planning Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="planningType"
+            id="field_planningType"
+            data-cy="planningType"
+            formControlName="planningType"
+          />
+          @if (editForm.get('planningType')!.invalid && (editForm.get('planningType')!.dirty || editForm.get('planningType')!.touched)) {
+            <div>
+              @if (editForm.get('planningType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.onceDate" for="field_onceDate">Once Date</label>
+          <div class="d-flex">
+            <input
+              id="field_onceDate"
+              data-cy="onceDate"
+              type="datetime-local"
+              class="form-control"
+              name="onceDate"
+              formControlName="onceDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.monday" for="field_monday">Monday</label>
+          <input type="checkbox" class="form-check" name="monday" id="field_monday" data-cy="monday" formControlName="monday" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.tuesday" for="field_tuesday">Tuesday</label>
+          <input type="checkbox" class="form-check" name="tuesday" id="field_tuesday" data-cy="tuesday" formControlName="tuesday" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.wednesday" for="field_wednesday">Wednesday</label>
+          <input type="checkbox" class="form-check" name="wednesday" id="field_wednesday" data-cy="wednesday" formControlName="wednesday" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.thursday" for="field_thursday">Thursday</label>
+          <input type="checkbox" class="form-check" name="thursday" id="field_thursday" data-cy="thursday" formControlName="thursday" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.friday" for="field_friday">Friday</label>
+          <input type="checkbox" class="form-check" name="friday" id="field_friday" data-cy="friday" formControlName="friday" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.saturday" for="field_saturday">Saturday</label>
+          <input type="checkbox" class="form-check" name="saturday" id="field_saturday" data-cy="saturday" formControlName="saturday" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.sanday" for="field_sanday">Sanday</label>
+          <input type="checkbox" class="form-check" name="sanday" id="field_sanday" data-cy="sanday" formControlName="sanday" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.periodStartDate" for="field_periodStartDate"
+            >Period Start Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_periodStartDate"
+              data-cy="periodStartDate"
+              type="text"
+              class="form-control"
+              name="periodStartDate"
+              ngbDatepicker
+              #periodStartDateDp="ngbDatepicker"
+              formControlName="periodStartDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="periodStartDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.periodeEndDate" for="field_periodeEndDate"
+            >Periode End Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_periodeEndDate"
+              data-cy="periodeEndDate"
+              type="text"
+              class="form-control"
+              name="periodeEndDate"
+              ngbDatepicker
+              #periodeEndDateDp="ngbDatepicker"
+              formControlName="periodeEndDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="periodeEndDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.noPeriodeEndDate" for="field_noPeriodeEndDate"
+            >No Periode End Date</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="noPeriodeEndDate"
+            id="field_noPeriodeEndDate"
+            data-cy="noPeriodeEndDate"
+            formControlName="noPeriodeEndDate"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="wiamLmsApplicationApp.session.professors" for="field_professors">Professors</label>
+          <select
+            class="form-control"
+            id="field_professors"
+            data-cy="professors"
+            multiple
+            name="professors"
+            formControlName="professors"
+            [compareWith]="compareProfessor"
+          >
+            @for (professorOption of professorsSharedCollection; track $index) {
+              <option [ngValue]="professorOption">{{ professorOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="wiamLmsApplicationApp.session.employees" for="field_employees">Employees</label>
+          <select
+            class="form-control"
+            id="field_employees"
+            data-cy="employees"
+            multiple
+            name="employees"
+            formControlName="employees"
+            [compareWith]="compareEmployee"
+          >
+            @for (employeeOption of employeesSharedCollection; track $index) {
+              <option [ngValue]="employeeOption">{{ employeeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="wiamLmsApplicationApp.session.links" for="field_links">Links</label>
+          <select
+            class="form-control"
+            id="field_links"
+            data-cy="links"
+            multiple
+            name="links"
+            formControlName="links"
+            [compareWith]="compareSessionLink"
+          >
+            @for (sessionLinkOption of sessionLinksSharedCollection; track $index) {
+              <option [ngValue]="sessionLinkOption">{{ sessionLinkOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.classroom" for="field_classroom">Classroom</label>
+          <select
+            class="form-control"
+            id="field_classroom"
+            data-cy="classroom"
+            name="classroom"
+            formControlName="classroom"
+            [compareWith]="compareClassroom"
+          >
+            <option [ngValue]="null"></option>
+            @for (classroomOption of classroomsSharedCollection; track $index) {
+              <option [ngValue]="classroomOption">{{ classroomOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.type" for="field_type">Type</label>
+          <select class="form-control" id="field_type" data-cy="type" name="type" formControlName="type" [compareWith]="compareSessionType">
+            <option [ngValue]="null"></option>
+            @for (sessionTypeOption of sessionTypesSharedCollection; track $index) {
+              <option [ngValue]="sessionTypeOption">{{ sessionTypeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.mode" for="field_mode">Mode</label>
+          <select class="form-control" id="field_mode" data-cy="mode" name="mode" formControlName="mode" [compareWith]="compareSessionMode">
+            <option [ngValue]="null"></option>
+            @for (sessionModeOption of sessionModesSharedCollection; track $index) {
+              <option [ngValue]="sessionModeOption">{{ sessionModeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.part" for="field_part">Part</label>
+          <select class="form-control" id="field_part" data-cy="part" name="part" formControlName="part" [compareWith]="comparePart">
+            <option [ngValue]="null"></option>
+            @for (partOption of partsSharedCollection; track $index) {
+              <option [ngValue]="partOption">{{ partOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.jmode" for="field_jmode">Jmode</label>
+          <select
+            class="form-control"
+            id="field_jmode"
+            data-cy="jmode"
+            name="jmode"
+            formControlName="jmode"
+            [compareWith]="compareSessionJoinMode"
+          >
+            <option [ngValue]="null"></option>
+            @for (sessionJoinModeOption of sessionJoinModesSharedCollection; track $index) {
+              <option [ngValue]="sessionJoinModeOption">{{ sessionJoinModeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.session.group" for="field_group">Group</label>
+          <select class="form-control" id="field_group" data-cy="group" name="group" formControlName="group" [compareWith]="compareGroup">
+            <option [ngValue]="null"></option>
+            @for (groupOption of groupsSharedCollection; track $index) {
+              <option [ngValue]="groupOption">{{ groupOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

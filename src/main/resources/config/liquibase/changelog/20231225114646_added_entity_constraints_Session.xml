@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Session.
+    -->
+    <changeSet id="20231225114646-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="session_id"
+                                 baseTableName="rel_session__professors"
+                                 constraintName="fk_rel_session__professors__session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="professors_id"
+                                 baseTableName="rel_session__professors"
+                                 constraintName="fk_rel_session__professors__professors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="professor"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="session_id"
+                                 baseTableName="rel_session__employees"
+                                 constraintName="fk_rel_session__employees__session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="employees_id"
+                                 baseTableName="rel_session__employees"
+                                 constraintName="fk_rel_session__employees__employees_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="session_id"
+                                 baseTableName="rel_session__links"
+                                 constraintName="fk_rel_session__links__session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="links_id"
+                                 baseTableName="rel_session__links"
+                                 constraintName="fk_rel_session__links__links_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session_link"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="classroom_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session__classroom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="classroom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session__type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="mode_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session__mode_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session_mode"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="part_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session__part_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="part"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="jmode_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session__jmode_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session_join_mode"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="group_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session__group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_group"
+                                 />
+    </changeSet>
+</databaseChangeLog>

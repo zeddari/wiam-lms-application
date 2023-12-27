@@ -1,0 +1,32 @@
+{
+  "wiamLmsApplicationApp": {
+    "followUp": {
+      "home": {
+        "title": "FollowUps",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Follow Up",
+        "createOrEditLabel": "Créer ou éditer un Follow Up",
+        "search": "Recherche pour Follow Up",
+        "notFound": "Aucun Follow Up trouvé"
+      },
+      "created": "Un nouveau Follow Up a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Follow Up avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Follow Up avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Follow Up {{ id }} ?"
+      },
+      "detail": {
+        "title": "Follow Up"
+      },
+      "id": "ID",
+      "fromSourate": "From Sourate",
+      "fromAya": "From Aya",
+      "toSourate": "To Sourate",
+      "toAya": "To Aya",
+      "tilawaType": "Tilawa Type",
+      "notation": "Notation",
+      "remarks": "Remarks",
+      "coteryHistory": "Cotery History"
+    }
+  }
+}

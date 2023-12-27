@@ -1,0 +1,32 @@
+{
+  "wiamLmsApplicationApp": {
+    "sponsoring": {
+      "home": {
+        "title": "Sponsorings",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Sponsoring",
+        "createOrEditLabel": "Créer ou éditer un Sponsoring",
+        "search": "Recherche pour Sponsoring",
+        "notFound": "Aucun Sponsoring trouvé"
+      },
+      "created": "Un nouveau Sponsoring a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Sponsoring avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Sponsoring avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Sponsoring {{ id }} ?"
+      },
+      "detail": {
+        "title": "Sponsoring"
+      },
+      "id": "ID",
+      "message": "Message",
+      "amount": "Amount",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "isAlways": "Is Always",
+      "sponsor": "Sponsor",
+      "project": "Project",
+      "currency": "Currency"
+    }
+  }
+}

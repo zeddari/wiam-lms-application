@@ -1,0 +1,31 @@
+{
+  "wiamLmsApplicationApp": {
+    "coteryHistory": {
+      "home": {
+        "title": "CoteryHistories",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Cotery History",
+        "createOrEditLabel": "Créer ou éditer un Cotery History",
+        "search": "Recherche pour Cotery History",
+        "notFound": "Aucun Cotery History trouvé"
+      },
+      "created": "Un nouveau Cotery History a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Cotery History avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Cotery History avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Cotery History {{ id }} ?"
+      },
+      "detail": {
+        "title": "Cotery History"
+      },
+      "id": "ID",
+      "date": "Date",
+      "coteryName": "Cotery Name",
+      "studentFullName": "Student Full Name",
+      "attendanceStatus": "Attendance Status",
+      "followUp": "Follow Up",
+      "student2": "Student 2",
+      "student": "Student"
+    }
+  }
+}

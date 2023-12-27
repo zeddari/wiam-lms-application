@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20231225114846"
+  },
+  "applications": "*",
+  "entityTableName": "ticket_subjects",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "name": "TicketSubjects",
+  "relationships": [
+    {
+      "otherEntityName": "tickets",
+      "otherEntityRelationshipName": "subject",
+      "relationshipName": "tickets",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

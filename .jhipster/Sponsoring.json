@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20231225115046"
+  },
+  "applications": "*",
+  "entityTableName": "sponsoring",
+  "fields": [
+    {
+      "fieldName": "message",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "isAlways",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Sponsoring",
+  "relationships": [
+    {
+      "otherEntityName": "sponsor",
+      "relationshipName": "sponsor",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "currency",
+      "relationshipName": "currency",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

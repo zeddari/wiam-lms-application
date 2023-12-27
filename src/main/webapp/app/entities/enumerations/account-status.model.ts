@@ -1,0 +1,11 @@
+export enum AccountStatus {
+  ACTIVATED = 'ACTIVATED',
+
+  DEACTIVATED = 'DEACTIVATED',
+
+  WAITING_ADMIN = 'WAITING_ADMIN',
+
+  BLOCKED = 'BLOCKED',
+
+  DELETED = 'DELETED',
+}

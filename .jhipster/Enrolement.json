@@ -1,0 +1,55 @@
+{
+  "annotations": {
+    "changelogDate": "20231225113046"
+  },
+  "applications": "*",
+  "entityTableName": "enrolement",
+  "fields": [
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "activatedAt",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "activatedBy",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "enrolmentStartTime",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "enrolemntEndTime",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Enrolement",
+  "relationships": [
+    {
+      "otherEntityName": "payment",
+      "otherEntityRelationshipName": "enrolment",
+      "relationshipName": "payment",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "enrolement",
+      "relationshipName": "student",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "course",
+      "relationshipName": "course",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

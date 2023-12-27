@@ -37,9 +37,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/wiamLmsApplication?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
+    url: jdbc:mysql://209.126.85.133:3306/wiamLmsApplication?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
     username: root
-    password:
+    password: Admin1!
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -49,7 +49,9 @@ spring:
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
   elasticsearch:
-    uris: http://localhost:9200
+    uris: http://209.126.85.133:9200
+    username: elastic
+    password: changeme
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker

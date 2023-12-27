@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (progression) {
+      <div>
+        <h2 data-cy="progressionDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.progression.detail.title">Progression</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ progression.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.status">Status</span></dt>
+          <dd>
+            <span>{{ progression.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.isJustified">Is Justified</span></dt>
+          <dd>
+            <span>{{ progression.isJustified }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.justifRef">Justif Ref</span></dt>
+          <dd>
+            <span>{{ progression.justifRef }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.lateArrival">Late Arrival</span></dt>
+          <dd>
+            <span>{{ progression.lateArrival }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.earlyDeparture">Early Departure</span></dt>
+          <dd>
+            <span>{{ progression.earlyDeparture }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.taskDone">Task Done</span></dt>
+          <dd>
+            <span>{{ progression.taskDone }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.grade1">Grade 1</span></dt>
+          <dd>
+            <span>{{ progression.grade1 }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.description">Description</span></dt>
+          <dd>
+            <span>{{ progression.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.taskStart">Task Start</span></dt>
+          <dd>
+            <span>{{ progression.taskStart }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.taskEnd">Task End</span></dt>
+          <dd>
+            <span>{{ progression.taskEnd }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.taskStep">Task Step</span></dt>
+          <dd>
+            <span>{{ progression.taskStep }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.progressionDate">Progression Date</span></dt>
+          <dd>
+            <span>{{ progression.progressionDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.session">Session</span></dt>
+          <dd>
+            @if (progression.session) {
+              <div>
+                <a [routerLink]="['/session', progression.session.id, 'view']">{{ progression.session.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.student1">Student 1</span></dt>
+          <dd>
+            @if (progression.student1) {
+              <div>
+                <a [routerLink]="['/student', progression.student1.id, 'view']">{{ progression.student1.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.progression.mode">Mode</span></dt>
+          <dd>
+            @if (progression.mode) {
+              <div>
+                <a [routerLink]="['/progression-mode', progression.mode.id, 'view']">{{ progression.mode.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/progression', progression.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

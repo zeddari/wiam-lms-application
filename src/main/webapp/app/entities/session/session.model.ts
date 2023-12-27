@@ -1,0 +1,53 @@
+import dayjs from 'dayjs/esm';
+import { IProgression } from 'app/entities/progression/progression.model';
+import { IQuizCertificate } from 'app/entities/quiz-certificate/quiz-certificate.model';
+import { IProfessor } from 'app/entities/professor/professor.model';
+import { IEmployee } from 'app/entities/employee/employee.model';
+import { ISessionLink } from 'app/entities/session-link/session-link.model';
+import { IClassroom } from 'app/entities/classroom/classroom.model';
+import { ISessionType } from 'app/entities/session-type/session-type.model';
+import { ISessionMode } from 'app/entities/session-mode/session-mode.model';
+import { IPart } from 'app/entities/part/part.model';
+import { ISessionJoinMode } from 'app/entities/session-join-mode/session-join-mode.model';
+import { IGroup } from 'app/entities/group/group.model';
+
+export interface ISession {
+  id: number;
+  title?: string | null;
+  description?: string | null;
+  sessionStartTime?: dayjs.Dayjs | null;
+  sessionEndTime?: dayjs.Dayjs | null;
+  isActive?: boolean | null;
+  sessionSize?: number | null;
+  price?: number | null;
+  currency?: string | null;
+  targetedAge?: string | null;
+  targetedGender?: boolean | null;
+  thumbnail?: string | null;
+  thumbnailContentType?: string | null;
+  planningType?: string | null;
+  onceDate?: dayjs.Dayjs | null;
+  monday?: boolean | null;
+  tuesday?: boolean | null;
+  wednesday?: boolean | null;
+  thursday?: boolean | null;
+  friday?: boolean | null;
+  saturday?: boolean | null;
+  sanday?: boolean | null;
+  periodStartDate?: dayjs.Dayjs | null;
+  periodeEndDate?: dayjs.Dayjs | null;
+  noPeriodeEndDate?: boolean | null;
+  progression1s?: IProgression[] | null;
+  quizCertificates?: IQuizCertificate[] | null;
+  professors?: IProfessor[] | null;
+  employees?: IEmployee[] | null;
+  links?: ISessionLink[] | null;
+  classroom?: IClassroom | null;
+  type?: ISessionType | null;
+  mode?: ISessionMode | null;
+  part?: IPart | null;
+  jmode?: ISessionJoinMode | null;
+  group?: IGroup | null;
+}
+
+export type NewSession = Omit<ISession, 'id'> & { id: null };

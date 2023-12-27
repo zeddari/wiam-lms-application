@@ -1,0 +1,57 @@
+{
+  "wiamLmsApplicationApp": {
+    "userCustom": {
+      "home": {
+        "title": "User Customs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new User Custom",
+        "createOrEditLabel": "Create or edit a User Custom",
+        "search": "Search for User Custom",
+        "notFound": "No User Customs found"
+      },
+      "created": "A new User Custom is created with identifier {{ param }}",
+      "updated": "A User Custom is updated with identifier {{ param }}",
+      "deleted": "A User Custom is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Custom {{ id }}?"
+      },
+      "detail": {
+        "title": "User Custom"
+      },
+      "id": "Id",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "accountName": "Account Name",
+      "role": "Role",
+      "status": "Status",
+      "password": "Password",
+      "phoneNumber1": "Phone Number 1",
+      "phoneNumver2": "Phone Numver 2",
+      "sex": "Sex",
+      "countryInternalId": "Country Internal Id",
+      "nationalityId": "Nationality Id",
+      "birthDay": "Birth Day",
+      "photo": "Photo",
+      "address": "Address",
+      "facebook": "Facebook",
+      "telegramUserCustomId": "Telegram User Custom Id",
+      "telegramUserCustomName": "Telegram User Custom Name",
+      "biography": "Biography",
+      "bankAccountDetails": "Bank Account Details",
+      "certificate": "Certificate",
+      "jobInternalId": "Job Internal Id",
+      "creationDate": "Creation Date",
+      "modificationDate": "Modification Date",
+      "deletionDate": "Deletion Date",
+      "languages": "Languages",
+      "country": "Country",
+      "job": "Job",
+      "exam": "Exam",
+      "sponsor": "Sponsor",
+      "employee": "Employee",
+      "professor": "Professor",
+      "student": "Student"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Sponsor.
+    -->
+    <changeSet id="20231225112346-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_custom_id"
+                                 baseTableName="sponsor"
+                                 constraintName="fk_sponsor__user_custom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sponsor_id"
+                                 baseTableName="rel_sponsor__students"
+                                 constraintName="fk_rel_sponsor__students__sponsor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sponsor"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="students_id"
+                                 baseTableName="rel_sponsor__students"
+                                 constraintName="fk_rel_sponsor__students__students_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"
+                                 />
+    </changeSet>
+</databaseChangeLog>

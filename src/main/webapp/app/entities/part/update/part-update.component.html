@@ -1,0 +1,171 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-part-heading" data-cy="PartCreateUpdateHeading" jhiTranslate="wiamLmsApplicationApp.part.home.createOrEditLabel">
+        Create or edit a Part
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.titleAr" for="field_titleAr">Title Ar</label>
+          <input type="text" class="form-control" name="titleAr" id="field_titleAr" data-cy="titleAr" formControlName="titleAr" />
+          @if (editForm.get('titleAr')!.invalid && (editForm.get('titleAr')!.dirty || editForm.get('titleAr')!.touched)) {
+            <div>
+              @if (editForm.get('titleAr')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('titleAr')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.titleLat" for="field_titleLat">Title Lat</label>
+          <input type="text" class="form-control" name="titleLat" id="field_titleLat" data-cy="titleLat" formControlName="titleLat" />
+          @if (editForm.get('titleLat')!.invalid && (editForm.get('titleLat')!.dirty || editForm.get('titleLat')!.touched)) {
+            <div>
+              @if (editForm.get('titleLat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('titleLat')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.duration" for="field_duration">Duration</label>
+          <input type="number" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.imageLink" for="field_imageLink">Image Link</label>
+          <div>
+            @if (editForm.get('imageLink')!.value) {
+              <img
+                [src]="'data:' + editForm.get('imageLinkContentType')!.value + ';base64,' + editForm.get('imageLink')!.value"
+                style="max-height: 100px"
+                alt="part image"
+              />
+            }
+            @if (editForm.get('imageLink')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('imageLinkContentType')!.value }}, {{ byteSize(editForm.get('imageLink')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('imageLink', 'imageLinkContentType', 'file_imageLink')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_imageLink"
+              data-cy="imageLink"
+              (change)="setFileData($event, 'imageLink', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="imageLink" id="field_imageLink" data-cy="imageLink" formControlName="imageLink" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imageLinkContentType"
+            id="field_imageLinkContentType"
+            formControlName="imageLinkContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.videoLink" for="field_videoLink">Video Link</label>
+          <input type="text" class="form-control" name="videoLink" id="field_videoLink" data-cy="videoLink" formControlName="videoLink" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.course" for="field_course">Course</label>
+          <select
+            class="form-control"
+            id="field_course"
+            data-cy="course"
+            name="course"
+            formControlName="course"
+            [compareWith]="compareCourse"
+          >
+            <option [ngValue]="null"></option>
+            @for (courseOption of coursesSharedCollection; track $index) {
+              <option [ngValue]="courseOption">{{ courseOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.part.part1" for="field_part1">Part 1</label>
+          <select class="form-control" id="field_part1" data-cy="part1" name="part1" formControlName="part1" [compareWith]="comparePart">
+            <option [ngValue]="null"></option>
+            @for (partOption of partsSharedCollection; track $index) {
+              <option [ngValue]="partOption">{{ partOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

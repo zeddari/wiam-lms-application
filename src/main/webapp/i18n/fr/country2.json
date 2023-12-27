@@ -1,0 +1,25 @@
+{
+  "wiamLmsApplicationApp": {
+    "country2": {
+      "home": {
+        "title": "Country2s",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Country 2",
+        "createOrEditLabel": "Créer ou éditer un Country 2",
+        "search": "Recherche pour Country 2",
+        "notFound": "Aucun Country 2 trouvé"
+      },
+      "created": "Un nouveau Country 2 a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Country 2 avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Country 2 avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Country 2 {{ id }} ?"
+      },
+      "detail": {
+        "title": "Country 2"
+      },
+      "id": "Id",
+      "countryName": "Country Name"
+    }
+  }
+}

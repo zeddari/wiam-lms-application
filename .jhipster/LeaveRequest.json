@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20231225115746"
+  },
+  "applications": "*",
+  "entityTableName": "leave_request",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "from",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "toDate",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "name": "LeaveRequest",
+  "relationships": []
+}

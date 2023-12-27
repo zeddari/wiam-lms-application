@@ -1,0 +1,29 @@
+{
+  "wiamLmsApplicationApp": {
+    "currency": {
+      "home": {
+        "title": "Currencies",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Currency",
+        "createOrEditLabel": "Créer ou éditer un Currency",
+        "search": "Recherche pour Currency",
+        "notFound": "Aucun Currency trouvé"
+      },
+      "created": "Un nouveau Currency a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Currency avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Currency avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Currency {{ id }} ?"
+      },
+      "detail": {
+        "title": "Currency"
+      },
+      "id": "ID",
+      "nameAr": "Name Ar",
+      "nameLat": "Name Lat",
+      "code": "Code",
+      "sponsoring": "Sponsoring",
+      "payment": "Payment"
+    }
+  }
+}

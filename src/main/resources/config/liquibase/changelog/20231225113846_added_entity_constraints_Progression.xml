@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Progression.
+    -->
+    <changeSet id="20231225113846-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="session_id"
+                                 baseTableName="progression"
+                                 constraintName="fk_progression__session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="student1_id"
+                                 baseTableName="progression"
+                                 constraintName="fk_progression__student1_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="mode_id"
+                                 baseTableName="progression"
+                                 constraintName="fk_progression__mode_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progression_mode"
+                                 />
+    </changeSet>
+</databaseChangeLog>

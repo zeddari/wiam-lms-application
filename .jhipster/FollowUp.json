@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20231225115646"
+  },
+  "applications": "*",
+  "entityTableName": "follow_up",
+  "fields": [
+    {
+      "fieldName": "fromSourate",
+      "fieldType": "Sourate",
+      "fieldValues": "FATIHA,BA9ARA,AL3IMRAN"
+    },
+    {
+      "fieldName": "fromAya",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "toSourate",
+      "fieldType": "Sourate",
+      "fieldValues": "FATIHA,BA9ARA,AL3IMRAN"
+    },
+    {
+      "fieldName": "toAya",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "tilawaType",
+      "fieldType": "Tilawa",
+      "fieldValues": "HIFD,MORAJA3A,TILAWA,IKHTIBAR"
+    },
+    {
+      "fieldName": "notation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
+    }
+  ],
+  "name": "FollowUp",
+  "relationships": [
+    {
+      "otherEntityName": "coteryHistory",
+      "otherEntityRelationshipName": "followUp",
+      "relationshipName": "coteryHistory",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "annotations": {
+    "changelogDate": "20231225113846"
+  },
+  "applications": "*",
+  "entityTableName": "progression",
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isJustified",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "justifRef",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lateArrival",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "earlyDeparture",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "taskDone",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "grade1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "taskStart",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "480",
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "taskEnd",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "480",
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "taskStep",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "progressionDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Progression",
+  "relationships": [
+    {
+      "otherEntityName": "session",
+      "otherEntityRelationshipName": "progression1",
+      "relationshipName": "session",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "student",
+      "relationshipName": "student1",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "progressionMode",
+      "relationshipName": "mode",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

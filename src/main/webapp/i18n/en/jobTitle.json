@@ -1,0 +1,28 @@
+{
+  "wiamLmsApplicationApp": {
+    "jobTitle": {
+      "home": {
+        "title": "Job Titles",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Job Title",
+        "createOrEditLabel": "Create or edit a Job Title",
+        "search": "Search for Job Title",
+        "notFound": "No Job Titles found"
+      },
+      "created": "A new Job Title is created with identifier {{ param }}",
+      "updated": "A Job Title is updated with identifier {{ param }}",
+      "deleted": "A Job Title is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Job Title {{ id }}?"
+      },
+      "detail": {
+        "title": "Job Title"
+      },
+      "id": "ID",
+      "titleAr": "Title Ar",
+      "titleLat": "Title Lat",
+      "description": "Description",
+      "employee": "Employee"
+    }
+  }
+}

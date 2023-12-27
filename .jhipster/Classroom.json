@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20231225112046"
+  },
+  "applications": "*",
+  "entityTableName": "classroom",
+  "fields": [
+    {
+      "fieldName": "nameAr",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "nameLat",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "name": "Classroom",
+  "relationships": [
+    {
+      "otherEntityName": "session",
+      "otherEntityRelationshipName": "classroom",
+      "relationshipName": "session",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "site",
+      "relationshipName": "site",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

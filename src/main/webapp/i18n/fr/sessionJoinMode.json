@@ -1,0 +1,27 @@
+{
+  "wiamLmsApplicationApp": {
+    "sessionJoinMode": {
+      "home": {
+        "title": "SessionJoinModes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Session Join Mode",
+        "createOrEditLabel": "Créer ou éditer un Session Join Mode",
+        "search": "Recherche pour Session Join Mode",
+        "notFound": "Aucun Session Join Mode trouvé"
+      },
+      "created": "Un nouveau Session Join Mode a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Session Join Mode avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Session Join Mode avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Session Join Mode {{ id }} ?"
+      },
+      "detail": {
+        "title": "Session Join Mode"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "session": "Session"
+    }
+  }
+}

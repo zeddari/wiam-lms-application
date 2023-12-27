@@ -1,0 +1,190 @@
+<div>
+  <h2 id="page-heading" data-cy="ExamHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.exam.home.title">Exams</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.exam.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-exam"
+        [routerLink]="['/exam/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.exam.home.createLabel">Create a new Exam</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.exam.home.search">Search for Exam</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.exam.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (exams?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.exam.home.notFound">No Exams found</span>
+    </div>
+  }
+
+  @if (exams && exams.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="comite">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.comite">Comite</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="studentName">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.studentName">Student Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="examName">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.examName">Exam Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="examCategory">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.examCategory">Exam Category</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="examType">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.examType">Exam Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tajweedScore">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.tajweedScore">Tajweed Score</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hifdScore">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.hifdScore">Hifd Score</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="adaeScore">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.adaeScore">Adae Score</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="observation">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.observation">Observation</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="decision">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.exam.decision">Decision</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (exam of exams; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/exam', exam.id, 'view']">{{ exam.id }}</a>
+              </td>
+              <td>{{ exam.comite }}</td>
+              <td>{{ exam.studentName }}</td>
+              <td>{{ exam.examName }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.Riwayats.' + exam.examCategory }}">{{ exam.examCategory }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.ExamType.' + exam.examType }}">{{ exam.examType }}</td>
+              <td>{{ exam.tajweedScore }}</td>
+              <td>{{ exam.hifdScore }}</td>
+              <td>{{ exam.adaeScore }}</td>
+              <td>{{ exam.observation }}</td>
+              <td>{{ exam.decision }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/exam', exam.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/exam', exam.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(exam)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

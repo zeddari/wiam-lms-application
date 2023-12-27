@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (employee) {
+      <div>
+        <h2 data-cy="employeeDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.employee.detail.title">Employee</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ employee.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ employee.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.mobileNumber">Mobile Number</span></dt>
+          <dd>
+            <span>{{ employee.mobileNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.gender">Gender</span></dt>
+          <dd>
+            <span>{{ employee.gender }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.about">About</span></dt>
+          <dd>
+            <span>{{ employee.about }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.imageLink">Image Link</span></dt>
+          <dd>
+            @if (employee.imageLink) {
+              <div>
+                <a (click)="openFile(employee.imageLink, employee.imageLinkContentType)">
+                  <img
+                    [src]="'data:' + employee.imageLinkContentType + ';base64,' + employee.imageLink"
+                    style="max-width: 100%"
+                    alt="employee image"
+                  />
+                </a>
+                {{ employee.imageLinkContentType }}, {{ byteSize(employee.imageLink) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.code">Code</span></dt>
+          <dd>
+            <span>{{ employee.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.birthdate">Birthdate</span></dt>
+          <dd>
+            <span>{{ employee.birthdate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.lastDegree">Last Degree</span></dt>
+          <dd>
+            <span>{{ employee.lastDegree }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.userCustom">User Custom</span></dt>
+          <dd>
+            @if (employee.userCustom) {
+              <div>
+                <a [routerLink]="['/user-custom', employee.userCustom.id, 'view']">{{ employee.userCustom.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.departement">Departement</span></dt>
+          <dd>
+            @if (employee.departement) {
+              <div>
+                <a [routerLink]="['/departement', employee.departement.id, 'view']">{{ employee.departement.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.employee.job">Job</span></dt>
+          <dd>
+            @if (employee.job) {
+              <div>
+                <a [routerLink]="['/job-title', employee.job.id, 'view']">{{ employee.job.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/employee', employee.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

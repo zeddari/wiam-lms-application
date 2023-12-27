@@ -1,0 +1,28 @@
+{
+  "wiamLmsApplicationApp": {
+    "sessionProvider": {
+      "home": {
+        "title": "Session Providers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Session Provider",
+        "createOrEditLabel": "Create or edit a Session Provider",
+        "search": "Search for Session Provider",
+        "notFound": "No Session Providers found"
+      },
+      "created": "A new Session Provider is created with identifier {{ param }}",
+      "updated": "A Session Provider is updated with identifier {{ param }}",
+      "deleted": "A Session Provider is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Session Provider {{ id }}?"
+      },
+      "detail": {
+        "title": "Session Provider"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "website": "Website",
+      "sessionLink": "Session Link"
+    }
+  }
+}

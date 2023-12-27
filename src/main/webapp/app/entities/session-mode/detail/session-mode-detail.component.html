@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sessionMode) {
+      <div>
+        <h2 data-cy="sessionModeDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.sessionMode.detail.title">Session Mode</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sessionMode.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sessionMode.title">Title</span></dt>
+          <dd>
+            <span>{{ sessionMode.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sessionMode.description">Description</span></dt>
+          <dd>
+            <span>{{ sessionMode.description }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/session-mode', sessionMode.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

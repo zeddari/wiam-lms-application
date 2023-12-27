@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity QuizCertificate.
+    -->
+    <changeSet id="20231225113446-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="quiz_certificate_id"
+                                 baseTableName="rel_quiz_certificate__students"
+                                 constraintName="fk_rel_quiz_certificate__students__quiz_certificate_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quiz_certificate"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="students_id"
+                                 baseTableName="rel_quiz_certificate__students"
+                                 constraintName="fk_rel_quiz_certificate__students__students_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="quiz_certificate_id"
+                                 baseTableName="rel_quiz_certificate__questions"
+                                 constraintName="fk_rel_quiz_certificate__questions__quiz_certificate_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quiz_certificate"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="questions_id"
+                                 baseTableName="rel_quiz_certificate__questions"
+                                 constraintName="fk_rel_quiz_certificate__questions__questions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="question"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="part_id"
+                                 baseTableName="quiz_certificate"
+                                 constraintName="fk_quiz_certificate__part_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="part"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="session_id"
+                                 baseTableName="quiz_certificate"
+                                 constraintName="fk_quiz_certificate__session_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="session"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="quiz_certificate"
+                                 constraintName="fk_quiz_certificate__type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quiz_certificate_type"
+                                 />
+    </changeSet>
+</databaseChangeLog>

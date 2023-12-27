@@ -1,0 +1,126 @@
+{
+  "annotations": {
+    "changelogDate": "20231225113146"
+  },
+  "applications": "*",
+  "entityTableName": "course",
+  "fields": [
+    {
+      "fieldName": "titleAr",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "titleLat",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "subTitles",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "requirement",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "option",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "imageLink",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "videoLink",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "activateAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "isConfirmed",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "confirmedAt",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Course",
+  "relationships": [
+    {
+      "otherEntityName": "part",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "part",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enrolement",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "enrolement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "question",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "topic",
+      "relationshipName": "topic1",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "level",
+      "relationshipName": "level",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "professor",
+      "relationshipName": "professor1",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

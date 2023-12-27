@@ -1,0 +1,27 @@
+{
+  "wiamLmsApplicationApp": {
+    "progressionMode": {
+      "home": {
+        "title": "Progression Modes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Progression Mode",
+        "createOrEditLabel": "Create or edit a Progression Mode",
+        "search": "Search for Progression Mode",
+        "notFound": "No Progression Modes found"
+      },
+      "created": "A new Progression Mode is created with identifier {{ param }}",
+      "updated": "A Progression Mode is updated with identifier {{ param }}",
+      "deleted": "A Progression Mode is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Progression Mode {{ id }}?"
+      },
+      "detail": {
+        "title": "Progression Mode"
+      },
+      "id": "ID",
+      "titleAr": "Title Ar",
+      "titleLat": "Title Lat",
+      "progression": "Progression"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (site) {
+      <div>
+        <h2 data-cy="siteDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.site.detail.title">Site</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ site.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.site.nameAr">Name Ar</span></dt>
+          <dd>
+            <span>{{ site.nameAr }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.site.nameLat">Name Lat</span></dt>
+          <dd>
+            <span>{{ site.nameLat }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.site.description">Description</span></dt>
+          <dd>
+            <span>{{ site.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.site.localisation">Localisation</span></dt>
+          <dd>
+            <span>{{ site.localisation }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.site.city">City</span></dt>
+          <dd>
+            @if (site.city) {
+              <div>
+                <a [routerLink]="['/city', site.city.id, 'view']">{{ site.city.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/site', site.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20231225112446"
+  },
+  "applications": "*",
+  "entityTableName": "currency",
+  "fields": [
+    {
+      "fieldName": "nameAr",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "nameLat",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    }
+  ],
+  "name": "Currency",
+  "relationships": [
+    {
+      "otherEntityName": "sponsoring",
+      "otherEntityRelationshipName": "currency",
+      "relationshipName": "sponsoring",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "payment",
+      "otherEntityRelationshipName": "currency",
+      "relationshipName": "payment",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

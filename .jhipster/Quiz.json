@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20231225115146"
+  },
+  "applications": "*",
+  "entityTableName": "quiz",
+  "fields": [
+    {
+      "fieldName": "quizTitle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "quizType",
+      "fieldType": "QuizType",
+      "fieldValues": "QUIZ_TYPE1,QUIZ_TYPE2,QUIZ_TYPE3"
+    },
+    {
+      "fieldName": "quizDescription",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Quiz",
+  "relationships": [
+    {
+      "otherEntityField": "questionTitle",
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "quiz",
+      "relationshipName": "question",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}

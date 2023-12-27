@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Certificate.
+    -->
+    <changeSet id="20231225115346-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="certificate"
+                                 constraintName="fk_certificate__student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cotery_id"
+                                 baseTableName="certificate"
+                                 constraintName="fk_certificate__cotery_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cotery"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,182 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-enrolement-heading"
+        data-cy="EnrolementCreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.enrolement.home.createOrEditLabel"
+      >
+        Create or edit a Enrolement
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.enrolement.isActive" for="field_isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+          @if (editForm.get('isActive')!.invalid && (editForm.get('isActive')!.dirty || editForm.get('isActive')!.touched)) {
+            <div>
+              @if (editForm.get('isActive')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.enrolement.activatedAt" for="field_activatedAt">Activated At</label>
+          <div class="d-flex">
+            <input
+              id="field_activatedAt"
+              data-cy="activatedAt"
+              type="datetime-local"
+              class="form-control"
+              name="activatedAt"
+              formControlName="activatedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.enrolement.activatedBy" for="field_activatedBy">Activated By</label>
+          <div class="d-flex">
+            <input
+              id="field_activatedBy"
+              data-cy="activatedBy"
+              type="datetime-local"
+              class="form-control"
+              name="activatedBy"
+              formControlName="activatedBy"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.enrolement.enrolmentStartTime" for="field_enrolmentStartTime"
+            >Enrolment Start Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_enrolmentStartTime"
+              data-cy="enrolmentStartTime"
+              type="datetime-local"
+              class="form-control"
+              name="enrolmentStartTime"
+              formControlName="enrolmentStartTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('enrolmentStartTime')!.invalid &&
+            (editForm.get('enrolmentStartTime')!.dirty || editForm.get('enrolmentStartTime')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('enrolmentStartTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('enrolmentStartTime')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.enrolement.enrolemntEndTime" for="field_enrolemntEndTime"
+            >Enrolemnt End Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_enrolemntEndTime"
+              data-cy="enrolemntEndTime"
+              type="datetime-local"
+              class="form-control"
+              name="enrolemntEndTime"
+              formControlName="enrolemntEndTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('enrolemntEndTime')!.invalid &&
+            (editForm.get('enrolemntEndTime')!.dirty || editForm.get('enrolemntEndTime')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('enrolemntEndTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('enrolemntEndTime')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.enrolement.student" for="field_student">Student</label>
+          <select
+            class="form-control"
+            id="field_student"
+            data-cy="student"
+            name="student"
+            formControlName="student"
+            [compareWith]="compareStudent"
+          >
+            <option [ngValue]="null"></option>
+            @for (studentOption of studentsSharedCollection; track $index) {
+              <option [ngValue]="studentOption">{{ studentOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.enrolement.course" for="field_course">Course</label>
+          <select
+            class="form-control"
+            id="field_course"
+            data-cy="course"
+            name="course"
+            formControlName="course"
+            [compareWith]="compareCourse"
+          >
+            <option [ngValue]="null"></option>
+            @for (courseOption of coursesSharedCollection; track $index) {
+              <option [ngValue]="courseOption">{{ courseOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

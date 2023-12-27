@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sessionLink) {
+      <div>
+        <h2 data-cy="sessionLinkDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.sessionLink.detail.title">Session Link</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sessionLink.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sessionLink.title">Title</span></dt>
+          <dd>
+            <span>{{ sessionLink.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sessionLink.description">Description</span></dt>
+          <dd>
+            <span>{{ sessionLink.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sessionLink.link">Link</span></dt>
+          <dd>
+            <span>{{ sessionLink.link }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sessionLink.provider">Provider</span></dt>
+          <dd>
+            @if (sessionLink.provider) {
+              <div>
+                <a [routerLink]="['/session-provider', sessionLink.provider.id, 'view']">{{ sessionLink.provider.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/session-link', sessionLink.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

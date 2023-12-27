@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (diploma) {
+      <div>
+        <h2 data-cy="diplomaDetailsHeading">
+          <span jhiTranslate="wiamLmsApplicationApp.diploma.detail.title"
+            >Translation missing for wiamLmsApplicationApp.diploma.detail.title</span
+          >
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ diploma.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.title">Title</span></dt>
+          <dd>
+            <span>{{ diploma.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.subject">Subject</span></dt>
+          <dd>
+            <span>{{ diploma.subject }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.detail">Detail</span></dt>
+          <dd>
+            <span>{{ diploma.detail }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.supervisor">Supervisor</span></dt>
+          <dd>
+            <span>{{ diploma.supervisor }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.grade">Grade</span></dt>
+          <dd>
+            <span>{{ diploma.grade }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.graduationDate">Graduation Date</span></dt>
+          <dd>
+            <span>{{ diploma.graduationDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.school">School</span></dt>
+          <dd>
+            <span>{{ diploma.school }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.userCustom">User Custom</span></dt>
+          <dd>
+            @if (diploma.userCustom) {
+              <div>
+                <a [routerLink]="['/user-custom', diploma.userCustom.id, 'view']">{{ diploma.userCustom.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.diploma.diplomaType">Diploma Type</span></dt>
+          <dd>
+            @if (diploma.diplomaType) {
+              <div>
+                <a [routerLink]="['/diploma-type', diploma.diplomaType.id, 'view']">{{ diploma.diplomaType.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/diploma', diploma.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

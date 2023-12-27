@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (question) {
+      <div>
+        <h2 data-cy="questionDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.question.detail.title">Question</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ question.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.question">Question</span></dt>
+          <dd>
+            <span>{{ question.question }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.note">Note</span></dt>
+          <dd>
+            <span>{{ question.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a1">A 1</span></dt>
+          <dd>
+            <span>{{ question.a1 }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a1v">A 1 V</span></dt>
+          <dd>
+            <span>{{ question.a1v }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a2">A 2</span></dt>
+          <dd>
+            <span>{{ question.a2 }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a2v">A 2 V</span></dt>
+          <dd>
+            <span>{{ question.a2v }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a3">A 3</span></dt>
+          <dd>
+            <span>{{ question.a3 }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a3v">A 3 V</span></dt>
+          <dd>
+            <span>{{ question.a3v }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a4">A 4</span></dt>
+          <dd>
+            <span>{{ question.a4 }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.a4v">A 4 V</span></dt>
+          <dd>
+            <span>{{ question.a4v }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.isactive">Isactive</span></dt>
+          <dd>
+            <span>{{ question.isactive }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.questionTitle">Question Title</span></dt>
+          <dd>
+            <span>{{ question.questionTitle }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.questionType">Question Type</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.QuestionType.' + question.questionType }}">{{ question.questionType }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.questionDescription">Question Description</span></dt>
+          <dd>
+            <span>{{ question.questionDescription }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.questionPoint">Question Point</span></dt>
+          <dd>
+            <span>{{ question.questionPoint }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.questionSubject">Question Subject</span></dt>
+          <dd>
+            <span>{{ question.questionSubject }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.questionStatus">Question Status</span></dt>
+          <dd>
+            <span>{{ question.questionStatus }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.question.course">Course</span></dt>
+          <dd>
+            @if (question.course) {
+              <div>
+                <a [routerLink]="['/course', question.course.id, 'view']">{{ question.course.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/question', question.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

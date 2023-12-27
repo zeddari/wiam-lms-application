@@ -1,0 +1,45 @@
+{
+  "wiamLmsApplicationApp": {
+    "course": {
+      "home": {
+        "title": "Courses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Course",
+        "createOrEditLabel": "Créer ou éditer un Course",
+        "search": "Recherche pour Course",
+        "notFound": "Aucun Course trouvé"
+      },
+      "created": "Un nouveau Course a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Course avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Course avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Course {{ id }} ?"
+      },
+      "detail": {
+        "title": "Course"
+      },
+      "id": "ID",
+      "titleAr": "Title Ar",
+      "titleLat": "Title Lat",
+      "description": "Description",
+      "subTitles": "Sub Titles",
+      "requirement": "Requirement",
+      "duration": "Duration",
+      "option": "Option",
+      "type": "Type",
+      "imageLink": "Image Link",
+      "videoLink": "Video Link",
+      "price": "Price",
+      "isActive": "Is Active",
+      "activateAt": "Activate At",
+      "isConfirmed": "Is Confirmed",
+      "confirmedAt": "Confirmed At",
+      "part": "Part",
+      "enrolement": "Enrolement",
+      "question": "Question",
+      "topic1": "Topic 1",
+      "level": "Level",
+      "professor1": "Professor 1"
+    }
+  }
+}

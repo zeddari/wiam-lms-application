@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (certificate) {
+      <div>
+        <h2 data-cy="certificateDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.certificate.detail.title">Certificate</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ certificate.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.certificate.coteryName">Cotery Name</span></dt>
+          <dd>
+            <span>{{ certificate.coteryName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.certificate.studentFullName">Student Full Name</span></dt>
+          <dd>
+            <span>{{ certificate.studentFullName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.certificate.certificateType">Certificate Type</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.CertificateType.' + certificate.certificateType }}">{{
+              certificate.certificateType
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.certificate.student">Student</span></dt>
+          <dd>
+            @if (certificate.student) {
+              <div>
+                <a [routerLink]="['/student', certificate.student.id, 'view']">{{ certificate.student.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.certificate.cotery">Cotery</span></dt>
+          <dd>
+            @if (certificate.cotery) {
+              <div>
+                <a [routerLink]="['/cotery', certificate.cotery.id, 'view']">{{ certificate.cotery.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/certificate', certificate.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

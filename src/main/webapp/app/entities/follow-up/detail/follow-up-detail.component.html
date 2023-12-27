@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (followUp) {
+      <div>
+        <h2 data-cy="followUpDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.followUp.detail.title">Follow Up</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ followUp.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.fromSourate">From Sourate</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.Sourate.' + followUp.fromSourate }}">{{ followUp.fromSourate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.fromAya">From Aya</span></dt>
+          <dd>
+            <span>{{ followUp.fromAya }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.toSourate">To Sourate</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.Sourate.' + followUp.toSourate }}">{{ followUp.toSourate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.toAya">To Aya</span></dt>
+          <dd>
+            <span>{{ followUp.toAya }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.tilawaType">Tilawa Type</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.Tilawa.' + followUp.tilawaType }}">{{ followUp.tilawaType }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.notation">Notation</span></dt>
+          <dd>
+            <span>{{ followUp.notation }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.remarks">Remarks</span></dt>
+          <dd>
+            <span>{{ followUp.remarks }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.followUp.coteryHistory">Cotery History</span></dt>
+          <dd>
+            @if (followUp.coteryHistory) {
+              <div>
+                <a [routerLink]="['/cotery-history', followUp.coteryHistory.id, 'view']">{{ followUp.coteryHistory.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/follow-up', followUp.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

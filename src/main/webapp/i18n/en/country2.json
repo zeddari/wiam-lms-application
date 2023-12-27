@@ -1,0 +1,25 @@
+{
+  "wiamLmsApplicationApp": {
+    "country2": {
+      "home": {
+        "title": "Country 2 S",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Country 2",
+        "createOrEditLabel": "Create or edit a Country 2",
+        "search": "Search for Country 2",
+        "notFound": "No Country 2 S found"
+      },
+      "created": "A new Country 2 is created with identifier {{ param }}",
+      "updated": "A Country 2 is updated with identifier {{ param }}",
+      "deleted": "A Country 2 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Country 2 {{ id }}?"
+      },
+      "detail": {
+        "title": "Country 2"
+      },
+      "id": "Id",
+      "countryName": "Country Name"
+    }
+  }
+}

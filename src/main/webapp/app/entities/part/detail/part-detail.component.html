@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (part) {
+      <div>
+        <h2 data-cy="partDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.part.detail.title">Part</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ part.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.titleAr">Title Ar</span></dt>
+          <dd>
+            <span>{{ part.titleAr }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.titleLat">Title Lat</span></dt>
+          <dd>
+            <span>{{ part.titleLat }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.description">Description</span></dt>
+          <dd>
+            <span>{{ part.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.duration">Duration</span></dt>
+          <dd>
+            <span>{{ part.duration }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.imageLink">Image Link</span></dt>
+          <dd>
+            @if (part.imageLink) {
+              <div>
+                <a (click)="openFile(part.imageLink, part.imageLinkContentType)">
+                  <img [src]="'data:' + part.imageLinkContentType + ';base64,' + part.imageLink" style="max-width: 100%" alt="part image" />
+                </a>
+                {{ part.imageLinkContentType }}, {{ byteSize(part.imageLink) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.videoLink">Video Link</span></dt>
+          <dd>
+            <span>{{ part.videoLink }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.course">Course</span></dt>
+          <dd>
+            @if (part.course) {
+              <div>
+                <a [routerLink]="['/course', part.course.id, 'view']">{{ part.course.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.part.part1">Part 1</span></dt>
+          <dd>
+            @if (part.part1) {
+              <div>
+                <a [routerLink]="['/part', part.part1.id, 'view']">{{ part.part1.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/part', part.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

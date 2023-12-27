@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sponsor) {
+      <div>
+        <h2 data-cy="sponsorDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.sponsor.detail.title">Sponsor</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sponsor.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ sponsor.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.mobileNumber">Mobile Number</span></dt>
+          <dd>
+            <span>{{ sponsor.mobileNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.gender">Gender</span></dt>
+          <dd>
+            <span>{{ sponsor.gender }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.about">About</span></dt>
+          <dd>
+            <span>{{ sponsor.about }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.imageLink">Image Link</span></dt>
+          <dd>
+            @if (sponsor.imageLink) {
+              <div>
+                <a (click)="openFile(sponsor.imageLink, sponsor.imageLinkContentType)">
+                  <img
+                    [src]="'data:' + sponsor.imageLinkContentType + ';base64,' + sponsor.imageLink"
+                    style="max-width: 100%"
+                    alt="sponsor image"
+                  />
+                </a>
+                {{ sponsor.imageLinkContentType }}, {{ byteSize(sponsor.imageLink) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.code">Code</span></dt>
+          <dd>
+            <span>{{ sponsor.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.birthdate">Birthdate</span></dt>
+          <dd>
+            <span>{{ sponsor.birthdate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.lastDegree">Last Degree</span></dt>
+          <dd>
+            <span>{{ sponsor.lastDegree }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.userCustom">User Custom</span></dt>
+          <dd>
+            @if (sponsor.userCustom) {
+              <div>
+                <a [routerLink]="['/user-custom', sponsor.userCustom.id, 'view']">{{ sponsor.userCustom.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsor.students">Students</span></dt>
+          <dd>
+            @for (students of sponsor.students; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/student', students.id, 'view']">{{ students.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sponsor', sponsor.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (exam) {
+      <div>
+        <h2 data-cy="examDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.exam.detail.title">Exam</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ exam.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.comite">Comite</span></dt>
+          <dd>
+            <span>{{ exam.comite }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.studentName">Student Name</span></dt>
+          <dd>
+            <span>{{ exam.studentName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.examName">Exam Name</span></dt>
+          <dd>
+            <span>{{ exam.examName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.examCategory">Exam Category</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.Riwayats.' + exam.examCategory }}">{{ exam.examCategory }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.examType">Exam Type</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.ExamType.' + exam.examType }}">{{ exam.examType }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.tajweedScore">Tajweed Score</span></dt>
+          <dd>
+            <span>{{ exam.tajweedScore }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.hifdScore">Hifd Score</span></dt>
+          <dd>
+            <span>{{ exam.hifdScore }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.adaeScore">Adae Score</span></dt>
+          <dd>
+            <span>{{ exam.adaeScore }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.observation">Observation</span></dt>
+          <dd>
+            <span>{{ exam.observation }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.exam.decision">Decision</span></dt>
+          <dd>
+            <span>{{ exam.decision }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/exam', exam.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

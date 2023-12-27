@@ -1,0 +1,35 @@
+{
+  "wiamLmsApplicationApp": {
+    "sponsor": {
+      "home": {
+        "title": "Sponsors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sponsor",
+        "createOrEditLabel": "Create or edit a Sponsor",
+        "search": "Search for Sponsor",
+        "notFound": "No Sponsors found"
+      },
+      "created": "A new Sponsor is created with identifier {{ param }}",
+      "updated": "A Sponsor is updated with identifier {{ param }}",
+      "deleted": "A Sponsor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sponsor {{ id }}?"
+      },
+      "detail": {
+        "title": "Sponsor"
+      },
+      "id": "ID",
+      "phoneNumber": "Phone Number",
+      "mobileNumber": "Mobile Number",
+      "gender": "Gender",
+      "about": "About",
+      "imageLink": "Image Link",
+      "code": "Code",
+      "birthdate": "Birthdate",
+      "lastDegree": "Last Degree",
+      "userCustom": "User Custom",
+      "sponsoring": "Sponsoring",
+      "students": "Students"
+    }
+  }
+}

@@ -1,0 +1,596 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-user-custom-heading"
+        data-cy="UserCustomCreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.userCustom.home.createOrEditLabel"
+      >
+        Create or edit a User Custom
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.id" for="field_id">Id</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            @if (editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)) {
+              <div>
+                @if (editForm.get('id')?.errors?.required) {
+                  <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+                }
+                <small class="form-text text-danger" [hidden]="!editForm.get('id')?.errors?.number" jhiTranslate="entity.validation.number"
+                  >This field should be a number.</small
+                >
+              </div>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.firstName" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+          @if (editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)) {
+            <div>
+              @if (editForm.get('firstName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('firstName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.lastName" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+          @if (editForm.get('lastName')!.invalid && (editForm.get('lastName')!.dirty || editForm.get('lastName')!.touched)) {
+            <div>
+              @if (editForm.get('lastName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('lastName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('email')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.accountName" for="field_accountName">Account Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="accountName"
+            id="field_accountName"
+            data-cy="accountName"
+            formControlName="accountName"
+          />
+          @if (editForm.get('accountName')!.invalid && (editForm.get('accountName')!.dirty || editForm.get('accountName')!.touched)) {
+            <div>
+              @if (editForm.get('accountName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('accountName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.role" for="field_role">Role</label>
+          <select class="form-control" name="role" formControlName="role" id="field_role" data-cy="role">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.Role.null' | translate }}</option>
+            @for (role of roleValues; track $index) {
+              <option [value]="role">{{ 'wiamLmsApplicationApp.Role.' + role | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('role')!.invalid && (editForm.get('role')!.dirty || editForm.get('role')!.touched)) {
+            <div>
+              @if (editForm.get('role')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.AccountStatus.null' | translate }}</option>
+            @for (accountStatus of accountStatusValues; track $index) {
+              <option [value]="accountStatus">{{ 'wiamLmsApplicationApp.AccountStatus.' + accountStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.password" for="field_password">Password</label>
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+          @if (editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)) {
+            <div>
+              @if (editForm.get('password')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('password')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.phoneNumber1" for="field_phoneNumber1"
+            >Phone Number 1</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber1"
+            id="field_phoneNumber1"
+            data-cy="phoneNumber1"
+            formControlName="phoneNumber1"
+          />
+          @if (editForm.get('phoneNumber1')!.invalid && (editForm.get('phoneNumber1')!.dirty || editForm.get('phoneNumber1')!.touched)) {
+            <div>
+              @if (editForm.get('phoneNumber1')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('phoneNumber1')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.phoneNumver2" for="field_phoneNumver2"
+            >Phone Numver 2</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumver2"
+            id="field_phoneNumver2"
+            data-cy="phoneNumver2"
+            formControlName="phoneNumver2"
+          />
+          @if (editForm.get('phoneNumver2')!.invalid && (editForm.get('phoneNumver2')!.dirty || editForm.get('phoneNumver2')!.touched)) {
+            <div>
+              @if (editForm.get('phoneNumver2')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.sex" for="field_sex">Sex</label>
+          <select class="form-control" name="sex" formControlName="sex" id="field_sex" data-cy="sex">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.Sex.null' | translate }}</option>
+            @for (sex of sexValues; track $index) {
+              <option [value]="sex">{{ 'wiamLmsApplicationApp.Sex.' + sex | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('sex')!.invalid && (editForm.get('sex')!.dirty || editForm.get('sex')!.touched)) {
+            <div>
+              @if (editForm.get('sex')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.countryInternalId" for="field_countryInternalId"
+            >Country Internal Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="countryInternalId"
+            id="field_countryInternalId"
+            data-cy="countryInternalId"
+            formControlName="countryInternalId"
+          />
+          @if (
+            editForm.get('countryInternalId')!.invalid &&
+            (editForm.get('countryInternalId')!.dirty || editForm.get('countryInternalId')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('countryInternalId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('countryInternalId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.nationalityId" for="field_nationalityId"
+            >Nationality Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nationalityId"
+            id="field_nationalityId"
+            data-cy="nationalityId"
+            formControlName="nationalityId"
+          />
+          @if (editForm.get('nationalityId')!.invalid && (editForm.get('nationalityId')!.dirty || editForm.get('nationalityId')!.touched)) {
+            <div>
+              @if (editForm.get('nationalityId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('nationalityId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.birthDay" for="field_birthDay">Birth Day</label>
+          <div class="input-group">
+            <input
+              id="field_birthDay"
+              data-cy="birthDay"
+              type="text"
+              class="form-control"
+              name="birthDay"
+              ngbDatepicker
+              #birthDayDp="ngbDatepicker"
+              formControlName="birthDay"
+            />
+            <button type="button" class="btn btn-secondary" (click)="birthDayDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          @if (editForm.get('birthDay')!.invalid && (editForm.get('birthDay')!.dirty || editForm.get('birthDay')!.touched)) {
+            <div>
+              @if (editForm.get('birthDay')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.photo" for="field_photo">Photo</label>
+          <div>
+            @if (editForm.get('photo')!.value) {
+              <img
+                [src]="'data:' + editForm.get('photoContentType')!.value + ';base64,' + editForm.get('photo')!.value"
+                style="max-height: 100px"
+                alt="userCustom image"
+              />
+            }
+            @if (editForm.get('photo')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(editForm.get('photo')!.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('photo', 'photoContentType', 'file_photo')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_photo"
+              data-cy="photo"
+              (change)="setFileData($event, 'photo', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo" id="field_photo" data-cy="photo" formControlName="photo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoContentType"
+            id="field_photoContentType"
+            formControlName="photoContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.address" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.facebook" for="field_facebook">Facebook</label>
+          <input type="text" class="form-control" name="facebook" id="field_facebook" data-cy="facebook" formControlName="facebook" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.telegramUserCustomId" for="field_telegramUserCustomId"
+            >Telegram User Custom Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="telegramUserCustomId"
+            id="field_telegramUserCustomId"
+            data-cy="telegramUserCustomId"
+            formControlName="telegramUserCustomId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="wiamLmsApplicationApp.userCustom.telegramUserCustomName"
+            for="field_telegramUserCustomName"
+            >Telegram User Custom Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="telegramUserCustomName"
+            id="field_telegramUserCustomName"
+            data-cy="telegramUserCustomName"
+            formControlName="telegramUserCustomName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.biography" for="field_biography">Biography</label>
+          <input type="text" class="form-control" name="biography" id="field_biography" data-cy="biography" formControlName="biography" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.bankAccountDetails" for="field_bankAccountDetails"
+            >Bank Account Details</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="bankAccountDetails"
+            id="field_bankAccountDetails"
+            data-cy="bankAccountDetails"
+            formControlName="bankAccountDetails"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.certificate" for="field_certificate">Certificate</label>
+          <div>
+            @if (editForm.get('certificate')!.value) {
+              <img
+                [src]="'data:' + editForm.get('certificateContentType')!.value + ';base64,' + editForm.get('certificate')!.value"
+                style="max-height: 100px"
+                alt="userCustom image"
+              />
+            }
+            @if (editForm.get('certificate')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('certificateContentType')!.value }}, {{ byteSize(editForm.get('certificate')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('certificate', 'certificateContentType', 'file_certificate')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_certificate"
+              data-cy="certificate"
+              (change)="setFileData($event, 'certificate', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="certificate"
+            id="field_certificate"
+            data-cy="certificate"
+            formControlName="certificate"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="certificateContentType"
+            id="field_certificateContentType"
+            formControlName="certificateContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.jobInternalId" for="field_jobInternalId"
+            >Job Internal Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="jobInternalId"
+            id="field_jobInternalId"
+            data-cy="jobInternalId"
+            formControlName="jobInternalId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.creationDate" for="field_creationDate"
+            >Creation Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_creationDate"
+              data-cy="creationDate"
+              type="datetime-local"
+              class="form-control"
+              name="creationDate"
+              formControlName="creationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('creationDate')!.invalid && (editForm.get('creationDate')!.dirty || editForm.get('creationDate')!.touched)) {
+            <div>
+              @if (editForm.get('creationDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('creationDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.modificationDate" for="field_modificationDate"
+            >Modification Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_modificationDate"
+              data-cy="modificationDate"
+              type="datetime-local"
+              class="form-control"
+              name="modificationDate"
+              formControlName="modificationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.deletionDate" for="field_deletionDate"
+            >Deletion Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_deletionDate"
+              data-cy="deletionDate"
+              type="datetime-local"
+              class="form-control"
+              name="deletionDate"
+              formControlName="deletionDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.country" for="field_country">Country</label>
+          <select
+            class="form-control"
+            id="field_country"
+            data-cy="country"
+            name="country"
+            formControlName="country"
+            [compareWith]="compareCountry"
+          >
+            <option [ngValue]="null"></option>
+            @for (countryOption of countriesSharedCollection; track $index) {
+              <option [ngValue]="countryOption">{{ countryOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.userCustom.job" for="field_job">Job</label>
+          <select class="form-control" id="field_job" data-cy="job" name="job" formControlName="job" [compareWith]="compareJob">
+            <option [ngValue]="null"></option>
+            @for (jobOption of jobsSharedCollection; track $index) {
+              <option [ngValue]="jobOption">{{ jobOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="wiamLmsApplicationApp.userCustom.exam" for="field_exams">Exam</label>
+          <select
+            class="form-control"
+            id="field_exams"
+            data-cy="exam"
+            multiple
+            name="exams"
+            formControlName="exams"
+            [compareWith]="compareExam"
+          >
+            @for (examOption of examsSharedCollection; track $index) {
+              <option [ngValue]="examOption">{{ examOption.studentName }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

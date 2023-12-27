@@ -1,0 +1,209 @@
+<div>
+  <h2 id="page-heading" data-cy="QuizCertificateHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.home.title">Quiz Certificates</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-quiz-certificate"
+        [routerLink]="['/quiz-certificate/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.quizCertificate.home.createLabel"
+          >Create a new Quiz Certificate</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.quizCertificate.home.search"
+          >Search for Quiz Certificate</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.quizCertificate.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (quizCertificates?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.home.notFound">No Quiz Certificates found</span>
+    </div>
+  }
+
+  @if (quizCertificates && quizCertificates.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.title">Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="students.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.students">Students</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questions.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.questions">Questions</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="part.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.part">Part</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="session.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.session">Session</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.quizCertificate.type">Type</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (quizCertificate of quizCertificates; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/quiz-certificate', quizCertificate.id, 'view']">{{ quizCertificate.id }}</a>
+              </td>
+              <td>{{ quizCertificate.title }}</td>
+              <td>{{ quizCertificate.description }}</td>
+              <td>{{ quizCertificate.isActive }}</td>
+              <td>
+                @for (students of quizCertificate.students; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/student', students.id, 'view']">{{ students.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (questions of quizCertificate.questions; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/question', questions.id, 'view']">{{ questions.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @if (quizCertificate.part) {
+                  <div>
+                    <a [routerLink]="['/part', quizCertificate.part.id, 'view']">{{ quizCertificate.part.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (quizCertificate.session) {
+                  <div>
+                    <a [routerLink]="['/session', quizCertificate.session.id, 'view']">{{ quizCertificate.session.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (quizCertificate.type) {
+                  <div>
+                    <a [routerLink]="['/quiz-certificate-type', quizCertificate.type.id, 'view']">{{ quizCertificate.type.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/quiz-certificate', quizCertificate.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/quiz-certificate', quizCertificate.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(quizCertificate)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

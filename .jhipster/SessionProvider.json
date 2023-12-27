@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20231225114446"
+  },
+  "applications": "*",
+  "entityTableName": "session_provider",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "website",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "name": "SessionProvider",
+  "relationships": [
+    {
+      "otherEntityName": "sessionLink",
+      "otherEntityRelationshipName": "provider",
+      "relationshipName": "sessionLink",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Sponsoring.
+    -->
+    <changeSet id="20231225115046-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="sponsor_id"
+                                 baseTableName="sponsoring"
+                                 constraintName="fk_sponsoring__sponsor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sponsor"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="sponsoring"
+                                 constraintName="fk_sponsoring__project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="currency_id"
+                                 baseTableName="sponsoring"
+                                 constraintName="fk_sponsoring__currency_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="currency"
+                                 />
+    </changeSet>
+</databaseChangeLog>

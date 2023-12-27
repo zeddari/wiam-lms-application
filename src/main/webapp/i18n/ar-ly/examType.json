@@ -1,0 +1,9 @@
+{
+  "wiamLmsApplicationApp": {
+    "ExamType": {
+      "null": "",
+      "OLD_HIFD": "OLD_HIFD",
+      "NEW_HIFD": "NEW_HIFD"
+    }
+  }
+}

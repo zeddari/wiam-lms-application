@@ -1,0 +1,27 @@
+{
+  "wiamLmsApplicationApp": {
+    "sessionMode": {
+      "home": {
+        "title": "SessionModes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Session Mode",
+        "createOrEditLabel": "Créer ou éditer un Session Mode",
+        "search": "Recherche pour Session Mode",
+        "notFound": "Aucun Session Mode trouvé"
+      },
+      "created": "Un nouveau Session Mode a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Session Mode avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Session Mode avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Session Mode {{ id }} ?"
+      },
+      "detail": {
+        "title": "Session Mode"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "session": "Session"
+    }
+  }
+}

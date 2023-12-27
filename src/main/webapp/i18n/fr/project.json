@@ -1,0 +1,37 @@
+{
+  "wiamLmsApplicationApp": {
+    "project": {
+      "home": {
+        "title": "Projects",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Project",
+        "createOrEditLabel": "Créer ou éditer un Project",
+        "search": "Recherche pour Project",
+        "notFound": "Aucun Project trouvé"
+      },
+      "created": "Un nouveau Project a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Project avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Project avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Project {{ id }} ?"
+      },
+      "detail": {
+        "title": "Project"
+      },
+      "id": "ID",
+      "titleAr": "Title Ar",
+      "titleLat": "Title Lat",
+      "description": "Description",
+      "goals": "Goals",
+      "requirement": "Requirement",
+      "imageLink": "Image Link",
+      "videoLink": "Video Link",
+      "budget": "Budget",
+      "isActive": "Is Active",
+      "activateAt": "Activate At",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "sponsoring": "Sponsoring"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "wiamLmsApplicationApp": {
+    "sponsoring": {
+      "home": {
+        "title": "Sponsorings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sponsoring",
+        "createOrEditLabel": "Create or edit a Sponsoring",
+        "search": "Search for Sponsoring",
+        "notFound": "No Sponsorings found"
+      },
+      "created": "A new Sponsoring is created with identifier {{ param }}",
+      "updated": "A Sponsoring is updated with identifier {{ param }}",
+      "deleted": "A Sponsoring is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sponsoring {{ id }}?"
+      },
+      "detail": {
+        "title": "Sponsoring"
+      },
+      "id": "ID",
+      "message": "Message",
+      "amount": "Amount",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "isAlways": "Is Always",
+      "sponsor": "Sponsor",
+      "project": "Project",
+      "currency": "Currency"
+    }
+  }
+}

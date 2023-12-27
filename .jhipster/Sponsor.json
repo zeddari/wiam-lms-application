@@ -1,0 +1,72 @@
+{
+  "annotations": {
+    "changelogDate": "20231225112346"
+  },
+  "applications": "*",
+  "entityTableName": "sponsor",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mobileNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "about",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "imageLink",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["maxbytes"],
+      "fieldValidateRulesMaxbytes": "1000000"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "birthdate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lastDegree",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "name": "Sponsor",
+  "relationships": [
+    {
+      "otherEntityName": "userCustom",
+      "relationshipName": "userCustom",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "sponsoring",
+      "otherEntityRelationshipName": "sponsor",
+      "relationshipName": "sponsoring",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "student",
+      "relationshipName": "students",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (classroom) {
+      <div>
+        <h2 data-cy="classroomDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.classroom.detail.title">Classroom</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ classroom.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.classroom.nameAr">Name Ar</span></dt>
+          <dd>
+            <span>{{ classroom.nameAr }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.classroom.nameLat">Name Lat</span></dt>
+          <dd>
+            <span>{{ classroom.nameLat }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.classroom.description">Description</span></dt>
+          <dd>
+            <span>{{ classroom.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.classroom.site">Site</span></dt>
+          <dd>
+            @if (classroom.site) {
+              <div>
+                <a [routerLink]="['/site', classroom.site.id, 'view']">{{ classroom.site.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/classroom', classroom.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

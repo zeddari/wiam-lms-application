@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20231225111146"
+  },
+  "applications": "*",
+  "entityTableName": "job",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "manager",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Job",
+  "relationships": [
+    {
+      "otherEntityName": "userCustom",
+      "otherEntityRelationshipName": "job",
+      "relationshipName": "userCustom",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

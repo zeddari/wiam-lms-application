@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (coteryHistory) {
+      <div>
+        <h2 data-cy="coteryHistoryDetailsHeading">
+          <span jhiTranslate="wiamLmsApplicationApp.coteryHistory.detail.title">Cotery History</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ coteryHistory.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.coteryHistory.date">Date</span></dt>
+          <dd>
+            <span>{{ coteryHistory.date | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.coteryHistory.coteryName">Cotery Name</span></dt>
+          <dd>
+            <span>{{ coteryHistory.coteryName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.coteryHistory.studentFullName">Student Full Name</span></dt>
+          <dd>
+            <span>{{ coteryHistory.studentFullName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.coteryHistory.attendanceStatus">Attendance Status</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.Attendance.' + coteryHistory.attendanceStatus }}">{{
+              coteryHistory.attendanceStatus
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.coteryHistory.student2">Student 2</span></dt>
+          <dd>
+            @if (coteryHistory.student2) {
+              <div>
+                <a [routerLink]="['/cotery', coteryHistory.student2.id, 'view']">{{ coteryHistory.student2.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.coteryHistory.student">Student</span></dt>
+          <dd>
+            @if (coteryHistory.student) {
+              <div>
+                <a [routerLink]="['/student', coteryHistory.student.id, 'view']">{{ coteryHistory.student.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/cotery-history', coteryHistory.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

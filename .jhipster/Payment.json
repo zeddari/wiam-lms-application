@@ -1,0 +1,74 @@
+{
+  "annotations": {
+    "changelogDate": "20231225114046"
+  },
+  "applications": "*",
+  "entityTableName": "payment",
+  "fields": [
+    {
+      "fieldName": "paymentMethod",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "paiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "poof",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "paidAt",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "PaymentType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "REGISTER,MONTHLY_FEES,ACTIVITY_FEES"
+    },
+    {
+      "fieldName": "fromMonth",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "toMonth",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "name": "Payment",
+  "relationships": [
+    {
+      "otherEntityName": "currency",
+      "relationshipName": "currency",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "enrolement",
+      "relationshipName": "enrolment",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

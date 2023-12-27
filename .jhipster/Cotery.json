@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20231225115546"
+  },
+  "applications": "*",
+  "entityTableName": "cotery",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "coteryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "studentFullName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attendanceStatus",
+      "fieldType": "Attendance",
+      "fieldValues": "PRESENT,ABSENT,ABSENT_AUTHORIZED,PROF_ABSENT"
+    }
+  ],
+  "name": "Cotery",
+  "relationships": [
+    {
+      "otherEntityName": "coteryHistory",
+      "otherEntityRelationshipName": "student2",
+      "relationshipName": "coteryHistory",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "certificate",
+      "otherEntityRelationshipName": "cotery",
+      "relationshipName": "certificate",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

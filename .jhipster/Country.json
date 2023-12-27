@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20231225111946"
+  },
+  "applications": "*",
+  "entityTableName": "country",
+  "fields": [
+    {
+      "fieldName": "nameAr",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "nameLat",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    }
+  ],
+  "name": "Country",
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "country",
+      "relationshipName": "student",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "userCustom",
+      "otherEntityRelationshipName": "country",
+      "relationshipName": "userCustom",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+<div>
+  <h2 id="page-heading" data-cy="TicketsHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.tickets.home.title">Tickets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.tickets.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tickets"
+        [routerLink]="['/tickets/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.tickets.home.createLabel">Create a new Tickets</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.tickets.home.search"
+          >Search for Tickets</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.tickets.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (tickets?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.tickets.home.notFound">No Tickets found</span>
+    </div>
+  }
+
+  @if (tickets && tickets.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.title">Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="justifDoc">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.justifDoc">Justif Doc</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateTicket">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.dateTicket">Date Ticket</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateProcess">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.dateProcess">Date Process</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processed">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.processed">Processed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userCustom.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.userCustom">User Custom</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subject.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.tickets.subject">Subject</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tickets of tickets; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/tickets', tickets.id, 'view']">{{ tickets.id }}</a>
+              </td>
+              <td>{{ tickets.title }}</td>
+              <td>{{ tickets.description }}</td>
+              <td>
+                @if (tickets.justifDoc) {
+                  <a (click)="openFile(tickets.justifDoc, tickets.justifDocContentType)">
+                    <img
+                      [src]="'data:' + tickets.justifDocContentType + ';base64,' + tickets.justifDoc"
+                      style="max-height: 30px"
+                      alt="tickets image"
+                    />
+                  </a>
+                  <span>{{ tickets.justifDocContentType }}, {{ byteSize(tickets.justifDoc) }}</span>
+                }
+              </td>
+              <td>{{ tickets.dateTicket | formatMediumDatetime }}</td>
+              <td>{{ tickets.dateProcess | formatMediumDatetime }}</td>
+              <td>{{ tickets.processed }}</td>
+              <td>
+                @if (tickets.userCustom) {
+                  <div>
+                    <a [routerLink]="['/user-custom', tickets.userCustom.id, 'view']">{{ tickets.userCustom.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tickets.subject) {
+                  <div>
+                    <a [routerLink]="['/ticket-subjects', tickets.subject.id, 'view']">{{ tickets.subject.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/tickets', tickets.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/tickets', tickets.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(tickets)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,107 @@
+{
+  "annotations": {
+    "changelogDate": "20231225112746"
+  },
+  "applications": "*",
+  "entityTableName": "student",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mobileNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "about",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "imageLink",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["maxbytes"],
+      "fieldValidateRulesMaxbytes": "1000000"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "birthdate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lastDegree",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "name": "Student",
+  "relationships": [
+    {
+      "otherEntityName": "userCustom",
+      "relationshipName": "userCustom",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "coteryHistory",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "coteryHistory",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "certificate",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "certificate",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enrolement",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "enrolement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "answer",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "answer",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "progression",
+      "otherEntityRelationshipName": "student1",
+      "relationshipName": "progression",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "group",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "group2",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "country",
+      "relationshipName": "country",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

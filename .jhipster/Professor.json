@@ -1,0 +1,66 @@
+{
+  "annotations": {
+    "changelogDate": "20231225112646"
+  },
+  "applications": "*",
+  "entityTableName": "professor",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mobileNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "about",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "imageLink",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["maxbytes"],
+      "fieldValidateRulesMaxbytes": "1000000"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "birthdate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lastDegree",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "name": "Professor",
+  "relationships": [
+    {
+      "otherEntityName": "userCustom",
+      "relationshipName": "userCustom",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "professor1",
+      "relationshipName": "course",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "wiamLmsApplicationApp": {
+    "diplomaType": {
+      "home": {
+        "title": "DiplomaTypes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Diploma Type",
+        "createOrEditLabel": "Créer ou éditer un Diploma Type",
+        "search": "Recherche pour Diploma Type",
+        "notFound": "Aucun Diploma Type trouvé"
+      },
+      "created": "Un nouveau Diploma Type a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Diploma Type avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Diploma Type avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Diploma Type {{ id }} ?"
+      },
+      "detail": {
+        "title": "Diploma Type"
+      },
+      "id": "ID",
+      "titleAr": "Title Ar",
+      "titleLat": "Title Lat",
+      "diploma": "Diploma"
+    }
+  }
+}

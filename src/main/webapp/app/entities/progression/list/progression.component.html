@@ -1,0 +1,244 @@
+<div>
+  <h2 id="page-heading" data-cy="ProgressionHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.progression.home.title">Progressions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.progression.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-progression"
+        [routerLink]="['/progression/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.progression.home.createLabel">Create a new Progression</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.progression.home.search"
+          >Search for Progression</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.progression.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (progressions?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.progression.home.notFound">No Progressions found</span>
+    </div>
+  }
+
+  @if (progressions && progressions.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isJustified">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.isJustified">Is Justified</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="justifRef">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.justifRef">Justif Ref</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lateArrival">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.lateArrival">Late Arrival</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="earlyDeparture">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.earlyDeparture">Early Departure</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taskDone">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.taskDone">Task Done</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="grade1">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.grade1">Grade 1</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taskStart">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.taskStart">Task Start</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taskEnd">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.taskEnd">Task End</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taskStep">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.taskStep">Task Step</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="progressionDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.progressionDate">Progression Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="session.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.session">Session</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="student1.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.student1">Student 1</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mode.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.progression.mode">Mode</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (progression of progressions; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/progression', progression.id, 'view']">{{ progression.id }}</a>
+              </td>
+              <td>{{ progression.status }}</td>
+              <td>{{ progression.isJustified }}</td>
+              <td>{{ progression.justifRef }}</td>
+              <td>{{ progression.lateArrival }}</td>
+              <td>{{ progression.earlyDeparture }}</td>
+              <td>{{ progression.taskDone }}</td>
+              <td>{{ progression.grade1 }}</td>
+              <td>{{ progression.description }}</td>
+              <td>{{ progression.taskStart }}</td>
+              <td>{{ progression.taskEnd }}</td>
+              <td>{{ progression.taskStep }}</td>
+              <td>{{ progression.progressionDate | formatMediumDate }}</td>
+              <td>
+                @if (progression.session) {
+                  <div>
+                    <a [routerLink]="['/session', progression.session.id, 'view']">{{ progression.session.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (progression.student1) {
+                  <div>
+                    <a [routerLink]="['/student', progression.student1.id, 'view']">{{ progression.student1.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (progression.mode) {
+                  <div>
+                    <a [routerLink]="['/progression-mode', progression.mode.id, 'view']">{{ progression.mode.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/progression', progression.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/progression', progression.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(progression)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

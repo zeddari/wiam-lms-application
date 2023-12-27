@@ -1,0 +1,171 @@
+{
+  "annotations": {
+    "changelogDate": "20231225111046"
+  },
+  "applications": "*",
+  "entityTableName": "user_custom",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "accountName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "Role",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "STUDENT,INSTRUCTOR,MANAGEMENT,SUPERVISOR,MANAGER,SUPER_MANAGER"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "AccountStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVATED,DEACTIVATED,WAITING_ADMIN,BLOCKED,DELETED"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "phoneNumber1",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "phoneNumver2",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "sex",
+      "fieldType": "Sex",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "countryInternalId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nationalityId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "birthDay",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "facebook",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telegramUserCustomId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telegramUserCustomName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "biography",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bankAccountDetails",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "certificate",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "jobInternalId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "modificationDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "deletionDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "UserCustom",
+  "relationships": [
+    {
+      "otherEntityName": "language",
+      "relationshipName": "languages",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "country",
+      "otherEntityRelationshipName": "userCustom",
+      "relationshipName": "country",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "job",
+      "otherEntityRelationshipName": "userCustom",
+      "relationshipName": "job",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "studentName",
+      "otherEntityName": "exam",
+      "otherEntityRelationshipName": "userCustom",
+      "relationshipName": "exam",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}

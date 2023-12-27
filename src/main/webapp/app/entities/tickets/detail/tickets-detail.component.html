@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (tickets) {
+      <div>
+        <h2 data-cy="ticketsDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.tickets.detail.title">Tickets</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ tickets.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.title">Title</span></dt>
+          <dd>
+            <span>{{ tickets.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.description">Description</span></dt>
+          <dd>
+            <span>{{ tickets.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.justifDoc">Justif Doc</span></dt>
+          <dd>
+            @if (tickets.justifDoc) {
+              <div>
+                <a (click)="openFile(tickets.justifDoc, tickets.justifDocContentType)">
+                  <img
+                    [src]="'data:' + tickets.justifDocContentType + ';base64,' + tickets.justifDoc"
+                    style="max-width: 100%"
+                    alt="tickets image"
+                  />
+                </a>
+                {{ tickets.justifDocContentType }}, {{ byteSize(tickets.justifDoc) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.dateTicket">Date Ticket</span></dt>
+          <dd>
+            <span>{{ tickets.dateTicket | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.dateProcess">Date Process</span></dt>
+          <dd>
+            <span>{{ tickets.dateProcess | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.processed">Processed</span></dt>
+          <dd>
+            <span>{{ tickets.processed }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.userCustom">User Custom</span></dt>
+          <dd>
+            @if (tickets.userCustom) {
+              <div>
+                <a [routerLink]="['/user-custom', tickets.userCustom.id, 'view']">{{ tickets.userCustom.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.tickets.subject">Subject</span></dt>
+          <dd>
+            @if (tickets.subject) {
+              <div>
+                <a [routerLink]="['/ticket-subjects', tickets.subject.id, 'view']">{{ tickets.subject.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/tickets', tickets.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20231225114246"
+  },
+  "applications": "*",
+  "entityTableName": "session_mode",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "name": "SessionMode",
+  "relationships": [
+    {
+      "otherEntityName": "session",
+      "otherEntityRelationshipName": "mode",
+      "relationshipName": "session",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

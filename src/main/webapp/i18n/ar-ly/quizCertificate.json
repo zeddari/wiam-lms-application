@@ -1,0 +1,32 @@
+{
+  "wiamLmsApplicationApp": {
+    "quizCertificate": {
+      "home": {
+        "title": "Quiz Certificates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Quiz Certificate",
+        "createOrEditLabel": "Create or edit a Quiz Certificate",
+        "search": "Search for Quiz Certificate",
+        "notFound": "No Quiz Certificates found"
+      },
+      "created": "A new Quiz Certificate is created with identifier {{ param }}",
+      "updated": "A Quiz Certificate is updated with identifier {{ param }}",
+      "deleted": "A Quiz Certificate is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Quiz Certificate {{ id }}?"
+      },
+      "detail": {
+        "title": "Quiz Certificate"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "isActive": "Is Active",
+      "students": "Students",
+      "questions": "Questions",
+      "part": "Part",
+      "session": "Session",
+      "type": "Type"
+    }
+  }
+}

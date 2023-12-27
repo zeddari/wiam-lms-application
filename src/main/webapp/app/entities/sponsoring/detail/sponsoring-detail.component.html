@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sponsoring) {
+      <div>
+        <h2 data-cy="sponsoringDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.sponsoring.detail.title">Sponsoring</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sponsoring.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.message">Message</span></dt>
+          <dd>
+            <span>{{ sponsoring.message }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.amount">Amount</span></dt>
+          <dd>
+            <span>{{ sponsoring.amount }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ sponsoring.startDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ sponsoring.endDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.isAlways">Is Always</span></dt>
+          <dd>
+            <span>{{ sponsoring.isAlways }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.sponsor">Sponsor</span></dt>
+          <dd>
+            @if (sponsoring.sponsor) {
+              <div>
+                <a [routerLink]="['/sponsor', sponsoring.sponsor.id, 'view']">{{ sponsoring.sponsor.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.project">Project</span></dt>
+          <dd>
+            @if (sponsoring.project) {
+              <div>
+                <a [routerLink]="['/project', sponsoring.project.id, 'view']">{{ sponsoring.project.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.sponsoring.currency">Currency</span></dt>
+          <dd>
+            @if (sponsoring.currency) {
+              <div>
+                <a [routerLink]="['/currency', sponsoring.currency.id, 'view']">{{ sponsoring.currency.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sponsoring', sponsoring.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

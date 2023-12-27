@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20231225114746"
+  },
+  "applications": "*",
+  "entityTableName": "tickets",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "justifDoc",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["maxbytes"],
+      "fieldValidateRulesMaxbytes": "1000000"
+    },
+    {
+      "fieldName": "dateTicket",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateProcess",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "processed",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Tickets",
+  "relationships": [
+    {
+      "otherEntityName": "userCustom",
+      "relationshipName": "userCustom",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "ticketSubjects",
+      "relationshipName": "subject",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

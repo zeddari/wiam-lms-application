@@ -1,0 +1,32 @@
+{
+  "wiamLmsApplicationApp": {
+    "enrolement": {
+      "home": {
+        "title": "Enrolements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Enrolement",
+        "createOrEditLabel": "Create or edit a Enrolement",
+        "search": "Search for Enrolement",
+        "notFound": "No Enrolements found"
+      },
+      "created": "A new Enrolement is created with identifier {{ param }}",
+      "updated": "A Enrolement is updated with identifier {{ param }}",
+      "deleted": "A Enrolement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Enrolement {{ id }}?"
+      },
+      "detail": {
+        "title": "Enrolement"
+      },
+      "id": "ID",
+      "isActive": "Is Active",
+      "activatedAt": "Activated At",
+      "activatedBy": "Activated By",
+      "enrolmentStartTime": "Enrolment Start Time",
+      "enrolemntEndTime": "Enrolemnt End Time",
+      "payment": "Payment",
+      "student": "Student",
+      "course": "Course"
+    }
+  }
+}

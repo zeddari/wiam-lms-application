@@ -1,0 +1,266 @@
+<div>
+  <h2 id="page-heading" data-cy="QuestionHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.question.home.title">Questions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.question.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-question"
+        [routerLink]="['/question/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.question.home.createLabel">Create a new Question</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.question.home.search"
+          >Search for Question</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.question.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (questions?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.question.home.notFound">No Questions found</span>
+    </div>
+  }
+
+  @if (questions && questions.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="question">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.question">Question</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.note">Note</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a1">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a1">A 1</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a1v">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a1v">A 1 V</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a2">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a2">A 2</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a2v">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a2v">A 2 V</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a3">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a3">A 3</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a3v">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a3v">A 3 V</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a4">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a4">A 4</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="a4v">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.a4v">A 4 V</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isactive">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.isactive">Isactive</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionTitle">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.questionTitle">Question Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionType">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.questionType">Question Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionDescription">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.questionDescription">Question Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionPoint">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.questionPoint">Question Point</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionSubject">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.questionSubject">Question Subject</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="questionStatus">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.questionStatus">Question Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="course.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.question.course">Course</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (question of questions; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/question', question.id, 'view']">{{ question.id }}</a>
+              </td>
+              <td>{{ question.question }}</td>
+              <td>{{ question.note }}</td>
+              <td>{{ question.a1 }}</td>
+              <td>{{ question.a1v }}</td>
+              <td>{{ question.a2 }}</td>
+              <td>{{ question.a2v }}</td>
+              <td>{{ question.a3 }}</td>
+              <td>{{ question.a3v }}</td>
+              <td>{{ question.a4 }}</td>
+              <td>{{ question.a4v }}</td>
+              <td>{{ question.isactive }}</td>
+              <td>{{ question.questionTitle }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.QuestionType.' + question.questionType }}">{{ question.questionType }}</td>
+              <td>{{ question.questionDescription }}</td>
+              <td>{{ question.questionPoint }}</td>
+              <td>{{ question.questionSubject }}</td>
+              <td>{{ question.questionStatus }}</td>
+              <td>
+                @if (question.course) {
+                  <div>
+                    <a [routerLink]="['/course', question.course.id, 'view']">{{ question.course.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/question', question.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/question', question.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(question)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20231225113346"
+  },
+  "applications": "*",
+  "entityTableName": "review",
+  "fields": [
+    {
+      "fieldName": "body",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "rating",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "5",
+      "fieldValidateRulesMin": "1"
+    }
+  ],
+  "name": "Review",
+  "relationships": [
+    {
+      "otherEntityName": "userCustom",
+      "relationshipName": "userCustom",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "part",
+      "relationshipName": "course",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

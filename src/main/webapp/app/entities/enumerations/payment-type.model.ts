@@ -1,0 +1,7 @@
+export enum PaymentType {
+  REGISTER = 'REGISTER',
+
+  MONTHLY_FEES = 'MONTHLY_FEES',
+
+  ACTIVITY_FEES = 'ACTIVITY_FEES',
+}

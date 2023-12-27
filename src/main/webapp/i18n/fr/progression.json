@@ -1,0 +1,39 @@
+{
+  "wiamLmsApplicationApp": {
+    "progression": {
+      "home": {
+        "title": "Progressions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Progression",
+        "createOrEditLabel": "Créer ou éditer un Progression",
+        "search": "Recherche pour Progression",
+        "notFound": "Aucun Progression trouvé"
+      },
+      "created": "Un nouveau Progression a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Progression avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Progression avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Progression {{ id }} ?"
+      },
+      "detail": {
+        "title": "Progression"
+      },
+      "id": "ID",
+      "status": "Status",
+      "isJustified": "Is Justified",
+      "justifRef": "Justif Ref",
+      "lateArrival": "Late Arrival",
+      "earlyDeparture": "Early Departure",
+      "taskDone": "Task Done",
+      "grade1": "Grade 1",
+      "description": "Description",
+      "taskStart": "Task Start",
+      "taskEnd": "Task End",
+      "taskStep": "Task Step",
+      "progressionDate": "Progression Date",
+      "session": "Session",
+      "student1": "Student 1",
+      "mode": "Mode"
+    }
+  }
+}

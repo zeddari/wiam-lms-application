@@ -1,0 +1,29 @@
+{
+  "wiamLmsApplicationApp": {
+    "certificate": {
+      "home": {
+        "title": "Certificates",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Certificate",
+        "createOrEditLabel": "Créer ou éditer un Certificate",
+        "search": "Recherche pour Certificate",
+        "notFound": "Aucun Certificate trouvé"
+      },
+      "created": "Un nouveau Certificate a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Certificate avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Certificate avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Certificate {{ id }} ?"
+      },
+      "detail": {
+        "title": "Certificate"
+      },
+      "id": "ID",
+      "coteryName": "Cotery Name",
+      "studentFullName": "Student Full Name",
+      "certificateType": "Certificate Type",
+      "student": "Student",
+      "cotery": "Cotery"
+    }
+  }
+}

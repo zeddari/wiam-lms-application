@@ -1,0 +1,226 @@
+<div>
+  <h2 id="page-heading" data-cy="EmployeeHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.employee.home.title">Employees</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.employee.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-employee"
+        [routerLink]="['/employee/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.employee.home.createLabel">Create a new Employee</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.employee.home.search"
+          >Search for Employee</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.employee.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (employees?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.employee.home.notFound">No Employees found</span>
+    </div>
+  }
+
+  @if (employees && employees.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.phoneNumber">Phone Number</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mobileNumber">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.mobileNumber">Mobile Number</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="about">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.about">About</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imageLink">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.imageLink">Image Link</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.code">Code</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthdate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.birthdate">Birthdate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastDegree">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.lastDegree">Last Degree</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userCustom.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.userCustom">User Custom</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departement.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.departement">Departement</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="job.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.employee.job">Job</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (employee of employees; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/employee', employee.id, 'view']">{{ employee.id }}</a>
+              </td>
+              <td>{{ employee.phoneNumber }}</td>
+              <td>{{ employee.mobileNumber }}</td>
+              <td>{{ employee.gender }}</td>
+              <td>{{ employee.about }}</td>
+              <td>
+                @if (employee.imageLink) {
+                  <a (click)="openFile(employee.imageLink, employee.imageLinkContentType)">
+                    <img
+                      [src]="'data:' + employee.imageLinkContentType + ';base64,' + employee.imageLink"
+                      style="max-height: 30px"
+                      alt="employee image"
+                    />
+                  </a>
+                  <span>{{ employee.imageLinkContentType }}, {{ byteSize(employee.imageLink) }}</span>
+                }
+              </td>
+              <td>{{ employee.code }}</td>
+              <td>{{ employee.birthdate | formatMediumDate }}</td>
+              <td>{{ employee.lastDegree }}</td>
+              <td>
+                @if (employee.userCustom) {
+                  <div>
+                    <a [routerLink]="['/user-custom', employee.userCustom.id, 'view']">{{ employee.userCustom.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (employee.departement) {
+                  <div>
+                    <a [routerLink]="['/departement', employee.departement.id, 'view']">{{ employee.departement.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (employee.job) {
+                  <div>
+                    <a [routerLink]="['/job-title', employee.job.id, 'view']">{{ employee.job.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/employee', employee.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/employee', employee.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(employee)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

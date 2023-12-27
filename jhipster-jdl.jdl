@@ -1,0 +1,680 @@
+DEFAULT_MAX_LENGTH = 50
+entity UserCustom{
+id Long required
+firstName String required maxlength (DEFAULT_MAX_LENGTH)
+lastName String required maxlength (DEFAULT_MAX_LENGTH)
+email String required maxlength (DEFAULT_MAX_LENGTH)
+accountName String required maxlength (DEFAULT_MAX_LENGTH)
+role Role required
+status AccountStatus required
+password String required maxlength(DEFAULT_MAX_LENGTH)
+phoneNumber1 String required maxlength(DEFAULT_MAX_LENGTH)
+phoneNumver2 String maxlength(DEFAULT_MAX_LENGTH)
+sex Sex required
+countryInternalId Long required
+nationalityId Long required
+birthDay LocalDate required
+photo ImageBlob
+address String
+facebook String
+telegramUserCustomId String
+telegramUserCustomName String
+biography String
+bankAccountDetails String
+certificate ImageBlob
+jobInternalId Long
+creationDate ZonedDateTime required
+modificationDate ZonedDateTime
+deletionDate ZonedDateTime
+}
+
+
+entity Job{
+id Long required
+title String required unique maxlength (DEFAULT_MAX_LENGTH)
+description String
+creationDate ZonedDateTime required
+manager Long
+}
+
+enum Role{
+STUDENT,INSTRUCTOR,MANAGEMENT,SUPERVISOR,MANAGER,SUPER_MANAGER
+}
+
+enum AccountStatus{
+ACTIVATED,DEACTIVATED,WAITING_ADMIN,BLOCKED,DELETED
+}
+
+enum Sex{
+MALE,FEMALE
+}
+
+
+entity Country2{
+id Long required
+countryName String required unique maxlength (DEFAULT_MAX_LENGTH)
+}
+
+entity Language{
+id Long required
+label String required unique maxlength (DEFAULT_MAX_LENGTH)
+}
+
+
+
+        /*Configuration entities*/
+            entity Departement {
+                nameAr String required unique maxlength(100)
+                nameLat String required unique maxlength(100)
+                description String maxlength(500)
+            }
+            /*Course Level: beginner - intermediate - expert*/
+            entity Level {
+                titleAr String required unique maxlength(20)
+                titleLat String required unique maxlength(20)
+            }
+            /*Course topics*/
+        	entity Topic {
+                titleAr String required unique maxlength(100)
+                titleLat String required unique maxlength(100)
+                description String maxlength(500)
+        	}
+            entity Site {
+                nameAr String required unique maxlength(100)
+                nameLat String required unique maxlength(100)
+                description String maxlength(500)
+                localisation String /*latlong*/
+        	}
+            /*possible use of enum*/
+       		entity City{
+                nameAr String required unique maxlength(100)
+                nameLat String required unique maxlength(100)
+        	}
+             /*possible use of enum*/
+       		entity Country{
+                nameAr String required unique maxlength(100)
+                nameLat String required unique maxlength(100)
+                code String maxlength(10)
+        	}
+            entity Classroom {
+                nameAr String required maxlength(100)
+                nameLat String required maxlength(100)
+                description String maxlength(500)
+       		 }
+             /*the mobility as well as the owernship of multiples groups by a student is for discussion*/
+             entity Group {
+                nameAr String required unique maxlength(100)
+                nameLat String required unique maxlength(100)
+                description String maxlength(500)
+       		 }
+             /*Course topics*/
+        	entity JobTitle {
+                titleAr String required unique maxlength(100)
+                titleLat String required unique maxlength(100)
+                description String maxlength(500)
+        	}
+            /*UserCustom entities*/
+             entity Sponsor {
+                phoneNumber String
+                mobileNumber String
+                gender Boolean
+                about String maxlength(500)
+                imageLink ImageBlob maxbytes(1000000)
+                code String unique maxlength(100) /*cin ot birthCode*/
+                birthdate LocalDate
+                lastDegree String maxlength(500) /*bac, doctorat, ijaza etc*/
+            }
+            /*possible use of enum*/
+       		entity Currency{
+                nameAr String required unique maxlength(50)
+                nameLat String required unique maxlength(500)
+                Code String required unique maxlength(10)
+        	}
+            entity Employee {
+                phoneNumber String
+                mobileNumber String
+                gender Boolean
+                about String maxlength(500)
+                imageLink ImageBlob maxbytes(1000000)
+                code String unique maxlength(100) /*cin ot birthCode*/
+                birthdate LocalDate
+                lastDegree String maxlength(500) /*bac, doctorat, ijaza etc*/
+            }
+            entity Professor {
+            	phoneNumber String
+                mobileNumber String
+                gender Boolean
+                about String maxlength(500)
+                imageLink ImageBlob maxbytes(1000000)
+                code String unique maxlength(100) /*cin ot birthCode*/
+                birthdate LocalDate
+                lastDegree String maxlength(500) /*bac, doctorat, ijaza etc*/
+            }
+            entity Student {
+                /*already exist in the UserCustom account:*/
+                /*firstname, lastname, email, UserCustomname, role, isactive, password*/
+                phoneNumber String
+                mobileNumber String
+                gender Boolean
+                //country String
+                //nationality String
+                //spokenlanguages String
+                /*social network links: I don't see the utility*/
+                about String maxlength(500)
+                imageLink ImageBlob maxbytes(1000000)
+                code String unique maxlength(100) /*cin ot birthCode*/
+                birthdate LocalDate
+                lastDegree String maxlength(500) /*bac, doctorat, ijaza etc*/
+            }
+            /*DiplomaType: bac, ijaza, master, doctorat*/
+            entity DiplomaType {
+                titleAr String required unique maxlength(20)
+                titleLat String maxlength(20)
+            }
+            /*Diploma: hardCoded association table*/
+            entity Diploma {
+                title String required unique maxlength(100)
+                subject String maxlength(100)
+                detail String maxlength(500)
+                supervisor String maxlength(500)
+                grade String
+                graduationDate LocalDate
+                school String
+            }
+            // can be used also to generate invoices
+            entity Enrolement{
+                  isActive Boolean required /*false by default, active after payment*/
+                  activatedAt ZonedDateTime
+                  activatedBy ZonedDateTime
+                  //mode String required /*Monthly, Annually etc*/
+                  enrolmentStartTime ZonedDateTime required
+                  enrolemntEndTime ZonedDateTime required
+                }
+        /*Content*/
+            /*the courses*/
+            entity Course {
+                titleAr String required maxlength(100)
+                titleLat String required maxlength(100)
+                description String maxlength(500)
+                subTitles String maxlength(500) /*What you'll learn*/
+                requirement String maxlength(500) /*course requirements*/
+                duration Integer /*In hours*/
+                option String maxlength(500) /*What's Included*/
+                type Boolean /*- online or offline course -*/
+                imageLink ImageBlob
+                videoLink String /*video preview*/
+                price Double min(0)/* 0 if free */
+                isActive Boolean
+                activateAt LocalDate
+                isConfirmed Boolean
+                confirmedAt LocalDate
+            }
+            /*the parts*/
+            entity Part {
+                titleAr String required maxlength(100)
+                titleLat String required maxlength(100)
+                description String maxlength(500)
+                duration Integer /*In minutes*/
+                imageLink ImageBlob
+                videoLink String /*content video*/
+            }
+            /*feedback reviews*/
+            entity Review {
+                body String required maxlength(100)
+                rating Integer min(1) max(5) /*1 to 5 stars*/
+            }
+            entity QuizCertificate {
+                title String required maxlength(100)
+                description String required maxlength(500)
+                isActive Boolean required
+            }
+            /*QuizCertificate Type*/
+            entity QuizCertificateType {
+                titleAr String required unique maxlength(20)
+                titleLat String maxlength(20)
+            }
+            /*The number or answers for a given question is limited to 4*/
+            /*two of them are mandatory*/
+            entity Question {
+                question String required maxlength(200)
+                note String maxlength(200)
+                a1 String required maxlength(200) /*answer 1*/
+                a1v Boolean required/*a1 correctness*/
+                a2 String required maxlength(200)
+                a2v Boolean required
+                a3 String maxlength(200)/*optional answers*/
+                a3v Boolean
+                a4 String maxlength(200)
+                a4v Boolean
+
+                isactive Boolean required
+                questionTitle String
+                questionType QuestionType
+                questionDescription String
+                questionPoint Integer
+                questionSubject String
+                questionStatus String
+        	}
+            entity Answer {
+                 a1v Boolean required
+                 a2v Boolean required
+                 a3v Boolean
+                 a4v Boolean
+                 result Boolean required /*can be calculated*/
+            }
+
+             /*Student Progression, presence etc*/
+             /*should be genarted automatically when the session starts*/
+             /*Student Progression, presence etc*/
+             /*should be genarted automatically when the session starts*/
+             /*Or could be added optionnaly for a given session: */
+             /*thus, a progression is created for each student*/
+             /*for this reason we will no longer need a planning entity*/
+            entity Progression{
+                status Boolean required /*present or absent*/
+                isJustified Boolean
+                justifRef String /*e.g tickcket code*/
+                lateArrival Integer min(0) /*in minutes 0 by default*/
+                earlyDeparture Integer min(0) /*in minutes 0 by default*/
+                taskDone Boolean required /*يعيد، لا يعيد wether the task is done by the student or not: Hifd*/
+            	grade1 String /* e.g A+, A, etc*: tajwid/
+                grade2 String /*ada2*/
+                description String maxlength(500) /*description*/
+                taskStart Integer min(1) max(480)
+                taskEnd Integer min(1) max(480)
+                taskStep Integer //the hifd progression in number of tumuns
+                // to make # between the sessions. (sessionId, progressionDate) have to be unique
+                progressionDate LocalDate required
+            }
+            /*نمط الحفظ: السريع، المتوسط والسريع*/
+             entity ProgressionMode {
+                titleAr String required unique maxlength(20)
+                titleLat String required unique maxlength(20)
+            }
+
+            entity Payment {
+                /*amount Double required min(0)*/
+                paymentMethod String required
+                paiedBy String required
+                mode String required /*cache etc*/
+                poof ImageBlob /*if cache receipt image etc*/
+                paidAt ZonedDateTime required
+                amount String
+                type PaymentType required
+                fromMonth Integer required
+                toMonth Integer required
+                details TextBlob
+            }
+
+/*tahfid, tilawa, muraja3a, tajwid*/
+/*tahfid, tasmi3 hor, conference, event , dawarat etc*/
+/*hala9a, mohadara, dawra, etc*/
+/*gathering all in one entities because they are quite similar*/
+entity SessionType {
+         title String required maxlength(100)
+         description String maxlength(500)
+}
+
+/*Remote, Onsite*/
+entity SessionMode {
+         title String required maxlength(100)
+         description String maxlength(500)
+}
+
+/*Session Join Modes:  نوع الاشتراك*/
+entity SessionJoinMode {
+         title String required maxlength(100)
+         description String maxlength(500)
+}
+/*VisuoConferenceProvider: مزود خدمة الاجتماع*/
+ entity SessionProvider {
+ 	   name String required maxlength(100)
+       description String maxlength(500)
+       website String maxlength(500)
+ }
+ /*zoom, social networks links*/
+entity SessionLink {
+         title String required maxlength(100)
+         description String maxlength(500)
+         link String maxlength(500)
+}
+/*Should we create a session in the db for each day, I don't thinks so*/
+ entity Session {
+                /* العنوان */
+                title String required maxlength(100)
+                /* الوصف: required??*/
+                description String maxlength(500)
+                /*required ?? if online session: رابط الاجتماع*/
+                //liveLink String
+                /*من الساعة*/
+                sessionStartTime ZonedDateTime required
+                /*إلى الساعة*/
+                sessionEndTime ZonedDateTime required
+                /*مفعلة؟ */
+                isActive Boolean required
+                /*المقاعد المتاحة*/
+                sessionSize Integer required min(0) max(100) // places number
+                /*O if free session*/
+                price Double min(0)
+                currency String required // I think it is not necessary
+                /*تسمح بأطفال؟*/
+                targetedAge String required  // the session allows or not kids
+                /*الجنس المستهدف من الحلقة */
+                targetedGender Boolean required
+                /*صورة مصغرة*/
+                thumbnail ImageBlob maxbytes(1000000) /*1mb size*/
+                /*يومياَ؟*/
+                //isDailySession Boolean required
+                /*أيام محددة*/
+                //days String required
+              planningType String required /*Periodic, once*/
+              onceDate ZonedDateTime
+              //frequency String /*daily, weekly, monthly*/
+              //repeateveryXWeek Integer
+    		  // Select all if daily
+              monday Boolean
+              tuesday Boolean
+              wednesday Boolean
+              thursday Boolean
+              friday Boolean
+              saturday Boolean
+              sanday Boolean
+              // In general, the whole year except July and August holidays
+              periodStartDate LocalDate
+              periodeEndDate LocalDate
+              noPeriodeEndDate Boolean
+       		 }
+
+            entity Tickets {
+                title String required maxlength(100)
+                description String maxlength(500)
+                justifDoc ImageBlob maxbytes(1000000) /*1mb size*/
+                dateTicket ZonedDateTime required
+                dateProcess ZonedDateTime
+                processed Boolean
+            }
+
+            entity TicketSubjects {
+                title String required maxlength(100)
+                description String maxlength(500)
+            }
+
+
+/*the charity projects and events*/
+            entity Project {
+                titleAr String required maxlength(100)
+                titleLat String required maxlength(100)
+                description String maxlength(500)
+                goals String maxlength(500) /*What you'll learn*/
+                requirement String maxlength(500) /*course requirements*/
+                imageLink ImageBlob
+                videoLink String /*video preview*/
+                budget Double required min(0)
+                isActive Boolean
+                activateAt LocalDate
+                startDate LocalDate
+                endDate LocalDate
+            }
+
+/*the sponsoring list*/
+            entity Sponsoring {
+                message String maxlength(500)
+                amount Double required min(0)
+                startDate LocalDate
+                endDate LocalDate
+                isAlways Boolean
+            }
+
+
+
+
+
+entity Quiz {
+	quizTitle String
+    quizType QuizType
+    quizDescription String
+}
+
+entity Question2 {
+	questionTitle String
+    questionType QuestionType
+    questionDescription String
+    questionPoint Integer
+    questionSubject String
+    questionStatus String
+}
+
+entity Certificate {
+	coteryName String
+    studentFullName String
+    certificateType CertificateType
+}
+
+entity CoteryHistory {
+	date LocalDate
+    coteryName String
+    studentFullName	String
+    attendanceStatus Attendance
+}
+
+
+entity Cotery {
+    date LocalDate
+    coteryName String
+    studentFullName	String
+    attendanceStatus Attendance
+}
+entity FollowUp {
+	fromSourate Sourate
+    fromAya Integer
+    toSourate Sourate
+    toAya Integer
+    tilawaType Tilawa
+    notation String
+    remarks String
+}
+
+
+enum Tilawa {
+	HIFD, MORAJA3A, TILAWA, IKHTIBAR
+}
+enum Sourate{
+	FATIHA, BA9ARA, AL3IMRAN
+}
+
+enum Attendance {
+	PRESENT, ABSENT, ABSENT_AUTHORIZED, PROF_ABSENT
+}
+enum CertificateType {
+	HIFDH, TAJWID, IJAZA
+}
+
+enum QuizType {
+    QUIZ_TYPE1, QUIZ_TYPE2, QUIZ_TYPE3
+}
+enum QuestionType {
+    QUES_TYPE1, QUES_TYPE2, QUES_TYPE3
+}
+
+
+
+entity LeaveRequest {
+	title  String
+	from ZonedDateTime required
+	toDate ZonedDateTime required
+    details TextBlob
+
+
+}
+
+
+
+
+enum PaymentType {
+    REGISTER, MONTHLY_FEES, ACTIVITY_FEES
+}
+
+entity Exam {
+	comite String
+	studentName String
+	examName String
+	examCategory Riwayats
+	examType ExamType
+	tajweedScore Integer required
+	hifdScore Integer required
+	adaeScore Integer required
+    observation TextBlob
+	decision Integer required
+
+}
+
+enum ExamType {
+	OLD_HIFD,NEW_HIFD
+}
+enum Riwayats {
+    WARSHS_NARRATION_ON_THE_AUTHORITY_OF_NAFI_VIA_AL_SHATIBIYYAH,
+	QALOUNS_NARRATION_ON_THE_AUTHORITY_OF_NAFI_ON_THE_AUTHORITY_OF_AL_SHATIBIYYAH,
+	AL_BAZZIS_NARRATION_ON_THE_AUTHORITY_OF_IBN_KATHIR_VIA_AL_SHATIBIYYAH,
+	QUNBULS_NARRATION_ON_THE_AUTHORITY_OF_IBN_KATHIR_VIA_AL_SHATIBIYYAH,
+	AL_DURIS_NARRATION_ON_THE_AUTHORITY_OF_ABU_AMR_VIA_AL_SHATIBIYYAH,
+	AL_SUSIS_NARRATION_ON_THE_AUTHORITY_OF_ABU_AMR_VIA_AL_SHATIBIYYAH,
+	HISHAMS_NARRATION_ON_THE_AUTHORITY_OF_IBN_AMER_VIA_AL_SHATIBIYYAH,
+	NARRATION_BY_IBN_DHAKWAN_ON_THE_AUTHORITY_OF_IBN_AAMER_VIA_AL_SHATIBIYYAH,
+	SHUBAHS_NARRATION_ON_THE_AUTHORITY_OF_ASIM_THROUGH_SHATIBIYYAH,
+	NARRATION_OF_HAFS_ON_THE_AUTHORITY_OF_ASIM_BY_AL_SHATIBIYYAH,
+	KHALAFS_NARRATION_ON_THE_AUTHORITY_OF_HAMZA_VIA_AL_SHATIBIYYAH,
+	KHALLADS_NARRATION_ON_THE_AUTHORITY_OF_HAMZA_VIA_SHATIBIYA,
+	ABU_AL_HARITHS_NARRATION_ON_THE_AUTHORITY_OF_AL_KISAI_VIA_AL_SHATIBIYYAH,
+	NARRATION_OF_HAFS_ON_THE_AUTHORITY_OF_AL_KASAI_VIA_AL_SHATIBIYYAH,
+	READING_ABU_JAAFAR_FROM_DURRAH_ROAD,
+	JACOBS_READING_FROM_THE_PATH_OF_DURRA,
+	READ_BEHIND_THE_TENTH_OF_DURRAH_ROAD,
+	WARSHS_NARRATION_ON_THE_AUTHORITY_OF_NAFI_THROUGH_TAYYIBAH,
+	NARRATION_OF_HAFS_ON_THE_AUTHORITY_OF_ASIM_THROUGH_TAYBEH
+}
+
+relationship ManyToOne{
+UserCustom to Country
+UserCustom to Job
+
+}
+
+relationship OneToMany{
+UserCustom{languages} to Language
+}
+
+
+relationship OneToOne {
+	FollowUp to CoteryHistory
+}
+relationship OneToMany {
+	Cotery to CoteryHistory{student2}
+}
+relationship OneToMany {
+	Student to CoteryHistory{student}
+}
+
+relationship OneToMany {
+	Student to Certificate{student}
+}
+
+relationship OneToMany {
+	Cotery to Certificate{cotery}
+}
+
+relationship ManyToMany {
+	Quiz{question(questionTitle)} to Question{quiz}
+	UserCustom{exam(studentName)} to Exam{UserCustom}
+}
+
+/*roles assignement: professor, supervisor etc*/
+        relationship ManyToMany{
+         Session{professors} to Professor
+         Session{employees} to Employee
+         Session{links} to SessionLink
+         //QuizCertificate{group} to Group
+         //The students list will be generated depending on the sessions/courses they follow
+         QuizCertificate{students} to Student
+         QuizCertificate{questions} to Question
+         Sponsor{students} to Student
+        }
+
+/*RelationShips*/
+        relationship OneToOne{
+          Employee{UserCustom} to UserCustom
+          Professor{UserCustom} to UserCustom
+          Student{UserCustom} to UserCustom
+          Sponsor{UserCustom} to UserCustom
+        }
+        relationship ManyToOne{
+          //Student to Review{student}
+          //To remain general let's allow each UserCustom to make a review
+          Review{UserCustom} to UserCustom
+           /*to Tickets*/
+          Tickets{UserCustom} to UserCustom
+          Diploma{UserCustom} to UserCustom
+        }
+
+        relationship OneToMany{
+          Sponsor to Sponsoring{sponsor}
+          Project to Sponsoring{project}
+          Currency to Sponsoring{currency}
+          Currency to Payment{currency}
+        /*to Session*/
+          Classroom to Session{classroom}
+          //Professor to Session{professor}
+          SessionType to Session{type}
+          SessionMode to Session{mode}
+          //Course to Session{course}
+          Part to Session{part}
+          SessionJoinMode to Session{jmode}
+          //VCProvider to Session{provider}
+          SessionProvider to SessionLink{provider}
+          Group to Session{group}
+       /*to Planning*/
+		//  Session to Planning{session}
+       /*to Course*/
+		  Topic to Course{topic1}
+          Level to Course{level}
+ 		  Professor to Course{professor1}
+        /*to Part*/
+          Course to Part{course}
+        /*to Student*/
+          Group{student} to Student{group2}
+          Country to Student{country}
+        /*to Enrolment*/
+          Student{enrolement} to Enrolement{student}
+          Course to Enrolement{course}
+        /*to Review*/
+          Part to Review{course}
+        /*to Employee*/
+          Departement to Employee{departement}
+          JobTitle to Employee{job}
+        /*to Answer*/
+          Question to Answer{question}
+          Student to Answer{student}
+        /*to Progression*/
+          Session{progression1} to Progression{session}
+		  Student to Progression{student1}
+          ProgressionMode to Progression{mode}
+		  TicketSubjects to Tickets{subject}
+        /*to Diploma*/
+          DiplomaType to Diploma{diplomaType}
+        /*to Classroom*/
+		  Site to Classroom{site}
+          City to Site{city}
+          Part to Part{part1}
+          /*A quiz or certificate may concern a session, a part of a course or a course*/
+		  Part to QuizCertificate{part}
+          //Course to QuizCertificate{course}
+          Session to QuizCertificate{session}
+          QuizCertificateType to QuizCertificate{type}
+          //QuizCertificate{questions} to Question{quiz}
+          Course to Question{course}
+          Enrolement to Payment{enrolment}
+          // could fetch reviews by adding {review} property
+          Topic to Topic{topic2}
+          Group to Group{group1}
+          Departement to Departement{departement1}
+          //we use audit to track this
+        }

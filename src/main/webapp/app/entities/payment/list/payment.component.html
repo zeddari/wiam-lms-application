@@ -1,0 +1,230 @@
+<div>
+  <h2 id="page-heading" data-cy="PaymentHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.payment.home.title">Payments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.payment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-payment"
+        [routerLink]="['/payment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.payment.home.createLabel">Create a new Payment</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.payment.home.search"
+          >Search for Payment</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.payment.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (payments?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.payment.home.notFound">No Payments found</span>
+    </div>
+  }
+
+  @if (payments && payments.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="paymentMethod">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.paymentMethod">Payment Method</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="paiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.paiedBy">Paied By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mode">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.mode">Mode</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="poof">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.poof">Poof</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="paidAt">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.paidAt">Paid At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="amount">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.amount">Amount</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.type">Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fromMonth">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.fromMonth">From Month</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toMonth">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.toMonth">To Month</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="details">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.details">Details</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currency.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.currency">Currency</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="enrolment.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.payment.enrolment">Enrolment</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (payment of payments; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/payment', payment.id, 'view']">{{ payment.id }}</a>
+              </td>
+              <td>{{ payment.paymentMethod }}</td>
+              <td>{{ payment.paiedBy }}</td>
+              <td>{{ payment.mode }}</td>
+              <td>
+                @if (payment.poof) {
+                  <a (click)="openFile(payment.poof, payment.poofContentType)">
+                    <img
+                      [src]="'data:' + payment.poofContentType + ';base64,' + payment.poof"
+                      style="max-height: 30px"
+                      alt="payment image"
+                    />
+                  </a>
+                  <span>{{ payment.poofContentType }}, {{ byteSize(payment.poof) }}</span>
+                }
+              </td>
+              <td>{{ payment.paidAt | formatMediumDatetime }}</td>
+              <td>{{ payment.amount }}</td>
+              <td jhiTranslate="{{ 'wiamLmsApplicationApp.PaymentType.' + payment.type }}">{{ payment.type }}</td>
+              <td>{{ payment.fromMonth }}</td>
+              <td>{{ payment.toMonth }}</td>
+              <td>{{ payment.details }}</td>
+              <td>
+                @if (payment.currency) {
+                  <div>
+                    <a [routerLink]="['/currency', payment.currency.id, 'view']">{{ payment.currency.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (payment.enrolment) {
+                  <div>
+                    <a [routerLink]="['/enrolement', payment.enrolment.id, 'view']">{{ payment.enrolment.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/payment', payment.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/payment', payment.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(payment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

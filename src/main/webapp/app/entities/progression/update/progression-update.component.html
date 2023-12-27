@@ -1,0 +1,305 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-progression-heading"
+        data-cy="ProgressionCreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.progression.home.createOrEditLabel"
+      >
+        Create or edit a Progression
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.status" for="field_status">Status</label>
+          <input type="checkbox" class="form-check" name="status" id="field_status" data-cy="status" formControlName="status" />
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.isJustified" for="field_isJustified"
+            >Is Justified</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isJustified"
+            id="field_isJustified"
+            data-cy="isJustified"
+            formControlName="isJustified"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.justifRef" for="field_justifRef">Justif Ref</label>
+          <input type="text" class="form-control" name="justifRef" id="field_justifRef" data-cy="justifRef" formControlName="justifRef" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.lateArrival" for="field_lateArrival"
+            >Late Arrival</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="lateArrival"
+            id="field_lateArrival"
+            data-cy="lateArrival"
+            formControlName="lateArrival"
+          />
+          @if (editForm.get('lateArrival')!.invalid && (editForm.get('lateArrival')!.dirty || editForm.get('lateArrival')!.touched)) {
+            <div>
+              @if (editForm.get('lateArrival')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('lateArrival')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.earlyDeparture" for="field_earlyDeparture"
+            >Early Departure</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="earlyDeparture"
+            id="field_earlyDeparture"
+            data-cy="earlyDeparture"
+            formControlName="earlyDeparture"
+          />
+          @if (
+            editForm.get('earlyDeparture')!.invalid && (editForm.get('earlyDeparture')!.dirty || editForm.get('earlyDeparture')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('earlyDeparture')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('earlyDeparture')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.taskDone" for="field_taskDone">Task Done</label>
+          <input type="checkbox" class="form-check" name="taskDone" id="field_taskDone" data-cy="taskDone" formControlName="taskDone" />
+          @if (editForm.get('taskDone')!.invalid && (editForm.get('taskDone')!.dirty || editForm.get('taskDone')!.touched)) {
+            <div>
+              @if (editForm.get('taskDone')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.grade1" for="field_grade1">Grade 1</label>
+          <input type="text" class="form-control" name="grade1" id="field_grade1" data-cy="grade1" formControlName="grade1" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.taskStart" for="field_taskStart">Task Start</label>
+          <input type="number" class="form-control" name="taskStart" id="field_taskStart" data-cy="taskStart" formControlName="taskStart" />
+          @if (editForm.get('taskStart')!.invalid && (editForm.get('taskStart')!.dirty || editForm.get('taskStart')!.touched)) {
+            <div>
+              @if (editForm.get('taskStart')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }"
+                  >This field should be at least 1.</small
+                >
+              }
+              @if (editForm.get('taskStart')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: 480 }"
+                  >This field cannot be more than 480.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('taskStart')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.taskEnd" for="field_taskEnd">Task End</label>
+          <input type="number" class="form-control" name="taskEnd" id="field_taskEnd" data-cy="taskEnd" formControlName="taskEnd" />
+          @if (editForm.get('taskEnd')!.invalid && (editForm.get('taskEnd')!.dirty || editForm.get('taskEnd')!.touched)) {
+            <div>
+              @if (editForm.get('taskEnd')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }"
+                  >This field should be at least 1.</small
+                >
+              }
+              @if (editForm.get('taskEnd')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: 480 }"
+                  >This field cannot be more than 480.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('taskEnd')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.taskStep" for="field_taskStep">Task Step</label>
+          <input type="number" class="form-control" name="taskStep" id="field_taskStep" data-cy="taskStep" formControlName="taskStep" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.progressionDate" for="field_progressionDate"
+            >Progression Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_progressionDate"
+              data-cy="progressionDate"
+              type="text"
+              class="form-control"
+              name="progressionDate"
+              ngbDatepicker
+              #progressionDateDp="ngbDatepicker"
+              formControlName="progressionDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="progressionDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (
+            editForm.get('progressionDate')!.invalid && (editForm.get('progressionDate')!.dirty || editForm.get('progressionDate')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('progressionDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.session" for="field_session">Session</label>
+          <select
+            class="form-control"
+            id="field_session"
+            data-cy="session"
+            name="session"
+            formControlName="session"
+            [compareWith]="compareSession"
+          >
+            <option [ngValue]="null"></option>
+            @for (sessionOption of sessionsSharedCollection; track $index) {
+              <option [ngValue]="sessionOption">{{ sessionOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.student1" for="field_student1">Student 1</label>
+          <select
+            class="form-control"
+            id="field_student1"
+            data-cy="student1"
+            name="student1"
+            formControlName="student1"
+            [compareWith]="compareStudent"
+          >
+            <option [ngValue]="null"></option>
+            @for (studentOption of studentsSharedCollection; track $index) {
+              <option [ngValue]="studentOption">{{ studentOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.progression.mode" for="field_mode">Mode</label>
+          <select
+            class="form-control"
+            id="field_mode"
+            data-cy="mode"
+            name="mode"
+            formControlName="mode"
+            [compareWith]="compareProgressionMode"
+          >
+            <option [ngValue]="null"></option>
+            @for (progressionModeOption of progressionModesSharedCollection; track $index) {
+              <option [ngValue]="progressionModeOption">{{ progressionModeOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

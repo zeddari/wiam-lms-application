@@ -1,0 +1,177 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (userCustom) {
+      <div>
+        <h2 data-cy="userCustomDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.userCustom.detail.title">User Custom</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.id">Id</span></dt>
+          <dd>
+            <span>{{ userCustom.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ userCustom.firstName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.lastName">Last Name</span></dt>
+          <dd>
+            <span>{{ userCustom.lastName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.email">Email</span></dt>
+          <dd>
+            <span>{{ userCustom.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.accountName">Account Name</span></dt>
+          <dd>
+            <span>{{ userCustom.accountName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.role">Role</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.Role.' + userCustom.role }}">{{ userCustom.role }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.status">Status</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.AccountStatus.' + userCustom.status }}">{{ userCustom.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.password">Password</span></dt>
+          <dd>
+            <span>{{ userCustom.password }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.phoneNumber1">Phone Number 1</span></dt>
+          <dd>
+            <span>{{ userCustom.phoneNumber1 }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.phoneNumver2">Phone Numver 2</span></dt>
+          <dd>
+            <span>{{ userCustom.phoneNumver2 }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.sex">Sex</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.Sex.' + userCustom.sex }}">{{ userCustom.sex }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.countryInternalId">Country Internal Id</span></dt>
+          <dd>
+            <span>{{ userCustom.countryInternalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.nationalityId">Nationality Id</span></dt>
+          <dd>
+            <span>{{ userCustom.nationalityId }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.birthDay">Birth Day</span></dt>
+          <dd>
+            <span>{{ userCustom.birthDay | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.photo">Photo</span></dt>
+          <dd>
+            @if (userCustom.photo) {
+              <div>
+                <a (click)="openFile(userCustom.photo, userCustom.photoContentType)">
+                  <img
+                    [src]="'data:' + userCustom.photoContentType + ';base64,' + userCustom.photo"
+                    style="max-width: 100%"
+                    alt="userCustom image"
+                  />
+                </a>
+                {{ userCustom.photoContentType }}, {{ byteSize(userCustom.photo) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.address">Address</span></dt>
+          <dd>
+            <span>{{ userCustom.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.facebook">Facebook</span></dt>
+          <dd>
+            <span>{{ userCustom.facebook }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.telegramUserCustomId">Telegram User Custom Id</span></dt>
+          <dd>
+            <span>{{ userCustom.telegramUserCustomId }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.telegramUserCustomName">Telegram User Custom Name</span></dt>
+          <dd>
+            <span>{{ userCustom.telegramUserCustomName }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.biography">Biography</span></dt>
+          <dd>
+            <span>{{ userCustom.biography }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.bankAccountDetails">Bank Account Details</span></dt>
+          <dd>
+            <span>{{ userCustom.bankAccountDetails }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.certificate">Certificate</span></dt>
+          <dd>
+            @if (userCustom.certificate) {
+              <div>
+                <a (click)="openFile(userCustom.certificate, userCustom.certificateContentType)">
+                  <img
+                    [src]="'data:' + userCustom.certificateContentType + ';base64,' + userCustom.certificate"
+                    style="max-width: 100%"
+                    alt="userCustom image"
+                  />
+                </a>
+                {{ userCustom.certificateContentType }}, {{ byteSize(userCustom.certificate) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.jobInternalId">Job Internal Id</span></dt>
+          <dd>
+            <span>{{ userCustom.jobInternalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.creationDate">Creation Date</span></dt>
+          <dd>
+            <span>{{ userCustom.creationDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.modificationDate">Modification Date</span></dt>
+          <dd>
+            <span>{{ userCustom.modificationDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.deletionDate">Deletion Date</span></dt>
+          <dd>
+            <span>{{ userCustom.deletionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.country">Country</span></dt>
+          <dd>
+            @if (userCustom.country) {
+              <div>
+                <a [routerLink]="['/country', userCustom.country.id, 'view']">{{ userCustom.country.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.job">Job</span></dt>
+          <dd>
+            @if (userCustom.job) {
+              <div>
+                <a [routerLink]="['/job', userCustom.job.id, 'view']">{{ userCustom.job.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.userCustom.exam">Exam</span></dt>
+          <dd>
+            @for (exam of userCustom.exams; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/exam', exam.id, 'view']">{{ exam.studentName }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/user-custom', userCustom.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

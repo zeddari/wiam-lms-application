@@ -1,0 +1,125 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (course) {
+      <div>
+        <h2 data-cy="courseDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.course.detail.title">Course</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ course.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.titleAr">Title Ar</span></dt>
+          <dd>
+            <span>{{ course.titleAr }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.titleLat">Title Lat</span></dt>
+          <dd>
+            <span>{{ course.titleLat }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.description">Description</span></dt>
+          <dd>
+            <span>{{ course.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.subTitles">Sub Titles</span></dt>
+          <dd>
+            <span>{{ course.subTitles }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.requirement">Requirement</span></dt>
+          <dd>
+            <span>{{ course.requirement }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.duration">Duration</span></dt>
+          <dd>
+            <span>{{ course.duration }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.option">Option</span></dt>
+          <dd>
+            <span>{{ course.option }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.type">Type</span></dt>
+          <dd>
+            <span>{{ course.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.imageLink">Image Link</span></dt>
+          <dd>
+            @if (course.imageLink) {
+              <div>
+                <a (click)="openFile(course.imageLink, course.imageLinkContentType)">
+                  <img
+                    [src]="'data:' + course.imageLinkContentType + ';base64,' + course.imageLink"
+                    style="max-width: 100%"
+                    alt="course image"
+                  />
+                </a>
+                {{ course.imageLinkContentType }}, {{ byteSize(course.imageLink) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.videoLink">Video Link</span></dt>
+          <dd>
+            <span>{{ course.videoLink }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.price">Price</span></dt>
+          <dd>
+            <span>{{ course.price }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ course.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.activateAt">Activate At</span></dt>
+          <dd>
+            <span>{{ course.activateAt | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.isConfirmed">Is Confirmed</span></dt>
+          <dd>
+            <span>{{ course.isConfirmed }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.confirmedAt">Confirmed At</span></dt>
+          <dd>
+            <span>{{ course.confirmedAt | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.topic1">Topic 1</span></dt>
+          <dd>
+            @if (course.topic1) {
+              <div>
+                <a [routerLink]="['/topic', course.topic1.id, 'view']">{{ course.topic1.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.level">Level</span></dt>
+          <dd>
+            @if (course.level) {
+              <div>
+                <a [routerLink]="['/level', course.level.id, 'view']">{{ course.level.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.course.professor1">Professor 1</span></dt>
+          <dd>
+            @if (course.professor1) {
+              <div>
+                <a [routerLink]="['/professor', course.professor1.id, 'view']">{{ course.professor1.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

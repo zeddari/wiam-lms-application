@@ -1,0 +1,60 @@
+{
+  "annotations": {
+    "changelogDate": "20231225112946"
+  },
+  "applications": "*",
+  "entityTableName": "diploma",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "detail",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "supervisor",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "grade",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "graduationDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "school",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Diploma",
+  "relationships": [
+    {
+      "otherEntityName": "userCustom",
+      "relationshipName": "userCustom",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "diplomaType",
+      "relationshipName": "diplomaType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

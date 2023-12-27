@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-follow-up-heading"
+        data-cy="FollowUpCreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.followUp.home.createOrEditLabel"
+      >
+        Create or edit a Follow Up
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.fromSourate" for="field_fromSourate">From Sourate</label>
+          <select class="form-control" name="fromSourate" formControlName="fromSourate" id="field_fromSourate" data-cy="fromSourate">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.Sourate.null' | translate }}</option>
+            @for (sourate of sourateValues; track $index) {
+              <option [value]="sourate">{{ 'wiamLmsApplicationApp.Sourate.' + sourate | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.fromAya" for="field_fromAya">From Aya</label>
+          <input type="number" class="form-control" name="fromAya" id="field_fromAya" data-cy="fromAya" formControlName="fromAya" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.toSourate" for="field_toSourate">To Sourate</label>
+          <select class="form-control" name="toSourate" formControlName="toSourate" id="field_toSourate" data-cy="toSourate">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.Sourate.null' | translate }}</option>
+            @for (sourate of sourateValues; track $index) {
+              <option [value]="sourate">{{ 'wiamLmsApplicationApp.Sourate.' + sourate | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.toAya" for="field_toAya">To Aya</label>
+          <input type="number" class="form-control" name="toAya" id="field_toAya" data-cy="toAya" formControlName="toAya" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.tilawaType" for="field_tilawaType">Tilawa Type</label>
+          <select class="form-control" name="tilawaType" formControlName="tilawaType" id="field_tilawaType" data-cy="tilawaType">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.Tilawa.null' | translate }}</option>
+            @for (tilawa of tilawaValues; track $index) {
+              <option [value]="tilawa">{{ 'wiamLmsApplicationApp.Tilawa.' + tilawa | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.notation" for="field_notation">Notation</label>
+          <input type="text" class="form-control" name="notation" id="field_notation" data-cy="notation" formControlName="notation" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.remarks" for="field_remarks">Remarks</label>
+          <input type="text" class="form-control" name="remarks" id="field_remarks" data-cy="remarks" formControlName="remarks" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.followUp.coteryHistory" for="field_coteryHistory"
+            >Cotery History</label
+          >
+          <select
+            class="form-control"
+            id="field_coteryHistory"
+            data-cy="coteryHistory"
+            name="coteryHistory"
+            formControlName="coteryHistory"
+            [compareWith]="compareCoteryHistory"
+          >
+            <option [ngValue]="null"></option>
+            @for (coteryHistoryOption of coteryHistoriesCollection; track $index) {
+              <option [ngValue]="coteryHistoryOption">{{ coteryHistoryOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

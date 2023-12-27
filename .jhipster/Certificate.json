@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20231225115346"
+  },
+  "applications": "*",
+  "entityTableName": "certificate",
+  "fields": [
+    {
+      "fieldName": "coteryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "studentFullName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "certificateType",
+      "fieldType": "CertificateType",
+      "fieldValues": "HIFDH,TAJWID,IJAZA"
+    }
+  ],
+  "name": "Certificate",
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "relationshipName": "student",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "cotery",
+      "relationshipName": "cotery",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

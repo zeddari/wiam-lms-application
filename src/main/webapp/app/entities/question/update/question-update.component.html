@@ -1,0 +1,278 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-question-heading"
+        data-cy="QuestionCreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.question.home.createOrEditLabel"
+      >
+        Create or edit a Question
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.question" for="field_question">Question</label>
+          <input type="text" class="form-control" name="question" id="field_question" data-cy="question" formControlName="question" />
+          @if (editForm.get('question')!.invalid && (editForm.get('question')!.dirty || editForm.get('question')!.touched)) {
+            <div>
+              @if (editForm.get('question')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('question')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }"
+                  >This field cannot be longer than 200 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.note" for="field_note">Note</label>
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+          @if (editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)) {
+            <div>
+              @if (editForm.get('note')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }"
+                  >This field cannot be longer than 200 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a1" for="field_a1">A 1</label>
+          <input type="text" class="form-control" name="a1" id="field_a1" data-cy="a1" formControlName="a1" />
+          @if (editForm.get('a1')!.invalid && (editForm.get('a1')!.dirty || editForm.get('a1')!.touched)) {
+            <div>
+              @if (editForm.get('a1')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('a1')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }"
+                  >This field cannot be longer than 200 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a1v" for="field_a1v">A 1 V</label>
+          <input type="checkbox" class="form-check" name="a1v" id="field_a1v" data-cy="a1v" formControlName="a1v" />
+          @if (editForm.get('a1v')!.invalid && (editForm.get('a1v')!.dirty || editForm.get('a1v')!.touched)) {
+            <div>
+              @if (editForm.get('a1v')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a2" for="field_a2">A 2</label>
+          <input type="text" class="form-control" name="a2" id="field_a2" data-cy="a2" formControlName="a2" />
+          @if (editForm.get('a2')!.invalid && (editForm.get('a2')!.dirty || editForm.get('a2')!.touched)) {
+            <div>
+              @if (editForm.get('a2')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('a2')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }"
+                  >This field cannot be longer than 200 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a2v" for="field_a2v">A 2 V</label>
+          <input type="checkbox" class="form-check" name="a2v" id="field_a2v" data-cy="a2v" formControlName="a2v" />
+          @if (editForm.get('a2v')!.invalid && (editForm.get('a2v')!.dirty || editForm.get('a2v')!.touched)) {
+            <div>
+              @if (editForm.get('a2v')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a3" for="field_a3">A 3</label>
+          <input type="text" class="form-control" name="a3" id="field_a3" data-cy="a3" formControlName="a3" />
+          @if (editForm.get('a3')!.invalid && (editForm.get('a3')!.dirty || editForm.get('a3')!.touched)) {
+            <div>
+              @if (editForm.get('a3')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }"
+                  >This field cannot be longer than 200 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a3v" for="field_a3v">A 3 V</label>
+          <input type="checkbox" class="form-check" name="a3v" id="field_a3v" data-cy="a3v" formControlName="a3v" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a4" for="field_a4">A 4</label>
+          <input type="text" class="form-control" name="a4" id="field_a4" data-cy="a4" formControlName="a4" />
+          @if (editForm.get('a4')!.invalid && (editForm.get('a4')!.dirty || editForm.get('a4')!.touched)) {
+            <div>
+              @if (editForm.get('a4')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }"
+                  >This field cannot be longer than 200 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.a4v" for="field_a4v">A 4 V</label>
+          <input type="checkbox" class="form-check" name="a4v" id="field_a4v" data-cy="a4v" formControlName="a4v" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.isactive" for="field_isactive">Isactive</label>
+          <input type="checkbox" class="form-check" name="isactive" id="field_isactive" data-cy="isactive" formControlName="isactive" />
+          @if (editForm.get('isactive')!.invalid && (editForm.get('isactive')!.dirty || editForm.get('isactive')!.touched)) {
+            <div>
+              @if (editForm.get('isactive')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.questionTitle" for="field_questionTitle"
+            >Question Title</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionTitle"
+            id="field_questionTitle"
+            data-cy="questionTitle"
+            formControlName="questionTitle"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.questionType" for="field_questionType"
+            >Question Type</label
+          >
+          <select class="form-control" name="questionType" formControlName="questionType" id="field_questionType" data-cy="questionType">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.QuestionType.null' | translate }}</option>
+            @for (questionType of questionTypeValues; track $index) {
+              <option [value]="questionType">{{ 'wiamLmsApplicationApp.QuestionType.' + questionType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.questionDescription" for="field_questionDescription"
+            >Question Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionDescription"
+            id="field_questionDescription"
+            data-cy="questionDescription"
+            formControlName="questionDescription"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.questionPoint" for="field_questionPoint"
+            >Question Point</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="questionPoint"
+            id="field_questionPoint"
+            data-cy="questionPoint"
+            formControlName="questionPoint"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.questionSubject" for="field_questionSubject"
+            >Question Subject</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionSubject"
+            id="field_questionSubject"
+            data-cy="questionSubject"
+            formControlName="questionSubject"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.questionStatus" for="field_questionStatus"
+            >Question Status</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionStatus"
+            id="field_questionStatus"
+            data-cy="questionStatus"
+            formControlName="questionStatus"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question.course" for="field_course">Course</label>
+          <select
+            class="form-control"
+            id="field_course"
+            data-cy="course"
+            name="course"
+            formControlName="course"
+            [compareWith]="compareCourse"
+          >
+            <option [ngValue]="null"></option>
+            @for (courseOption of coursesSharedCollection; track $index) {
+              <option [ngValue]="courseOption">{{ courseOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

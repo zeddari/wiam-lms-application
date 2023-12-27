@@ -1,0 +1,93 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (payment) {
+      <div>
+        <h2 data-cy="paymentDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.payment.detail.title">Payment</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ payment.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.paymentMethod">Payment Method</span></dt>
+          <dd>
+            <span>{{ payment.paymentMethod }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.paiedBy">Paied By</span></dt>
+          <dd>
+            <span>{{ payment.paiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.mode">Mode</span></dt>
+          <dd>
+            <span>{{ payment.mode }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.poof">Poof</span></dt>
+          <dd>
+            @if (payment.poof) {
+              <div>
+                <a (click)="openFile(payment.poof, payment.poofContentType)">
+                  <img [src]="'data:' + payment.poofContentType + ';base64,' + payment.poof" style="max-width: 100%" alt="payment image" />
+                </a>
+                {{ payment.poofContentType }}, {{ byteSize(payment.poof) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.paidAt">Paid At</span></dt>
+          <dd>
+            <span>{{ payment.paidAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.amount">Amount</span></dt>
+          <dd>
+            <span>{{ payment.amount }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.type">Type</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'wiamLmsApplicationApp.PaymentType.' + payment.type }}">{{ payment.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.fromMonth">From Month</span></dt>
+          <dd>
+            <span>{{ payment.fromMonth }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.toMonth">To Month</span></dt>
+          <dd>
+            <span>{{ payment.toMonth }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.details">Details</span></dt>
+          <dd>
+            <span>{{ payment.details }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.currency">Currency</span></dt>
+          <dd>
+            @if (payment.currency) {
+              <div>
+                <a [routerLink]="['/currency', payment.currency.id, 'view']">{{ payment.currency.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.payment.enrolment">Enrolment</span></dt>
+          <dd>
+            @if (payment.enrolment) {
+              <div>
+                <a [routerLink]="['/enrolement', payment.enrolment.id, 'view']">{{ payment.enrolment.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/payment', payment.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

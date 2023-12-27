@@ -1,0 +1,45 @@
+{
+  "wiamLmsApplicationApp": {
+    "question": {
+      "home": {
+        "title": "Questions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Question",
+        "createOrEditLabel": "Create or edit a Question",
+        "search": "Search for Question",
+        "notFound": "No Questions found"
+      },
+      "created": "A new Question is created with identifier {{ param }}",
+      "updated": "A Question is updated with identifier {{ param }}",
+      "deleted": "A Question is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Question {{ id }}?"
+      },
+      "detail": {
+        "title": "Question"
+      },
+      "id": "ID",
+      "question": "Question",
+      "note": "Note",
+      "a1": "A 1",
+      "a1v": "A 1 V",
+      "a2": "A 2",
+      "a2v": "A 2 V",
+      "a3": "A 3",
+      "a3v": "A 3 V",
+      "a4": "A 4",
+      "a4v": "A 4 V",
+      "isactive": "Isactive",
+      "questionTitle": "Question Title",
+      "questionType": "Question Type",
+      "questionDescription": "Question Description",
+      "questionPoint": "Question Point",
+      "questionSubject": "Question Subject",
+      "questionStatus": "Question Status",
+      "answer": "Answer",
+      "course": "Course",
+      "quiz": "Quiz",
+      "quizCertificate": "Quiz Certificate"
+    }
+  }
+}

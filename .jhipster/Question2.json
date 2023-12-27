@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20231225115246"
+  },
+  "applications": "*",
+  "entityTableName": "question_2",
+  "fields": [
+    {
+      "fieldName": "questionTitle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "questionType",
+      "fieldType": "QuestionType",
+      "fieldValues": "QUES_TYPE1,QUES_TYPE2,QUES_TYPE3"
+    },
+    {
+      "fieldName": "questionDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "questionPoint",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "questionSubject",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "questionStatus",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Question2",
+  "relationships": []
+}

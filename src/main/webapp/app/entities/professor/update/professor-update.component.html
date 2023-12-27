@@ -1,0 +1,200 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-professor-heading"
+        data-cy="ProfessorCreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.professor.home.createOrEditLabel"
+      >
+        Create or edit a Professor
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.phoneNumber" for="field_phoneNumber">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.mobileNumber" for="field_mobileNumber"
+            >Mobile Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="mobileNumber"
+            id="field_mobileNumber"
+            data-cy="mobileNumber"
+            formControlName="mobileNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.gender" for="field_gender">Gender</label>
+          <input type="checkbox" class="form-check" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.about" for="field_about">About</label>
+          <input type="text" class="form-control" name="about" id="field_about" data-cy="about" formControlName="about" />
+          @if (editForm.get('about')!.invalid && (editForm.get('about')!.dirty || editForm.get('about')!.touched)) {
+            <div>
+              @if (editForm.get('about')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.imageLink" for="field_imageLink">Image Link</label>
+          <div>
+            @if (editForm.get('imageLink')!.value) {
+              <img
+                [src]="'data:' + editForm.get('imageLinkContentType')!.value + ';base64,' + editForm.get('imageLink')!.value"
+                style="max-height: 100px"
+                alt="professor image"
+              />
+            }
+            @if (editForm.get('imageLink')!.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start"
+                  >{{ editForm.get('imageLinkContentType')!.value }}, {{ byteSize(editForm.get('imageLink')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="clearInputImage('imageLink', 'imageLinkContentType', 'file_imageLink')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_imageLink"
+              data-cy="imageLink"
+              (change)="setFileData($event, 'imageLink', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="imageLink" id="field_imageLink" data-cy="imageLink" formControlName="imageLink" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imageLinkContentType"
+            id="field_imageLinkContentType"
+            formControlName="imageLinkContentType"
+          />
+          @if (editForm.get('imageLink')!.invalid && (editForm.get('imageLink')!.dirty || editForm.get('imageLink')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.code" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)) {
+            <div>
+              @if (editForm.get('code')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.birthdate" for="field_birthdate">Birthdate</label>
+          <div class="input-group">
+            <input
+              id="field_birthdate"
+              data-cy="birthdate"
+              type="text"
+              class="form-control"
+              name="birthdate"
+              ngbDatepicker
+              #birthdateDp="ngbDatepicker"
+              formControlName="birthdate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="birthdateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.lastDegree" for="field_lastDegree">Last Degree</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastDegree"
+            id="field_lastDegree"
+            data-cy="lastDegree"
+            formControlName="lastDegree"
+          />
+          @if (editForm.get('lastDegree')!.invalid && (editForm.get('lastDegree')!.dirty || editForm.get('lastDegree')!.touched)) {
+            <div>
+              @if (editForm.get('lastDegree')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.professor.userCustom" for="field_userCustom">User Custom</label>
+          <select
+            class="form-control"
+            id="field_userCustom"
+            data-cy="userCustom"
+            name="userCustom"
+            formControlName="userCustom"
+            [compareWith]="compareUserCustom"
+          >
+            <option [ngValue]="null"></option>
+            @for (userCustomOption of userCustomsCollection; track $index) {
+              <option [ngValue]="userCustomOption">{{ userCustomOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

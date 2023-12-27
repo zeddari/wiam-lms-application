@@ -1,0 +1,208 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (session) {
+      <div>
+        <h2 data-cy="sessionDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.session.detail.title">Session</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ session.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.title">Title</span></dt>
+          <dd>
+            <span>{{ session.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.description">Description</span></dt>
+          <dd>
+            <span>{{ session.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.sessionStartTime">Session Start Time</span></dt>
+          <dd>
+            <span>{{ session.sessionStartTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.sessionEndTime">Session End Time</span></dt>
+          <dd>
+            <span>{{ session.sessionEndTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ session.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.sessionSize">Session Size</span></dt>
+          <dd>
+            <span>{{ session.sessionSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.price">Price</span></dt>
+          <dd>
+            <span>{{ session.price }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.currency">Currency</span></dt>
+          <dd>
+            <span>{{ session.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.targetedAge">Targeted Age</span></dt>
+          <dd>
+            <span>{{ session.targetedAge }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.targetedGender">Targeted Gender</span></dt>
+          <dd>
+            <span>{{ session.targetedGender }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.thumbnail">Thumbnail</span></dt>
+          <dd>
+            @if (session.thumbnail) {
+              <div>
+                <a (click)="openFile(session.thumbnail, session.thumbnailContentType)">
+                  <img
+                    [src]="'data:' + session.thumbnailContentType + ';base64,' + session.thumbnail"
+                    style="max-width: 100%"
+                    alt="session image"
+                  />
+                </a>
+                {{ session.thumbnailContentType }}, {{ byteSize(session.thumbnail) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.planningType">Planning Type</span></dt>
+          <dd>
+            <span>{{ session.planningType }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.onceDate">Once Date</span></dt>
+          <dd>
+            <span>{{ session.onceDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.monday">Monday</span></dt>
+          <dd>
+            <span>{{ session.monday }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.tuesday">Tuesday</span></dt>
+          <dd>
+            <span>{{ session.tuesday }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.wednesday">Wednesday</span></dt>
+          <dd>
+            <span>{{ session.wednesday }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.thursday">Thursday</span></dt>
+          <dd>
+            <span>{{ session.thursday }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.friday">Friday</span></dt>
+          <dd>
+            <span>{{ session.friday }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.saturday">Saturday</span></dt>
+          <dd>
+            <span>{{ session.saturday }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.sanday">Sanday</span></dt>
+          <dd>
+            <span>{{ session.sanday }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.periodStartDate">Period Start Date</span></dt>
+          <dd>
+            <span>{{ session.periodStartDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.periodeEndDate">Periode End Date</span></dt>
+          <dd>
+            <span>{{ session.periodeEndDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.noPeriodeEndDate">No Periode End Date</span></dt>
+          <dd>
+            <span>{{ session.noPeriodeEndDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.professors">Professors</span></dt>
+          <dd>
+            @for (professors of session.professors; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/professor', professors.id, 'view']">{{ professors.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.employees">Employees</span></dt>
+          <dd>
+            @for (employees of session.employees; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/employee', employees.id, 'view']">{{ employees.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.links">Links</span></dt>
+          <dd>
+            @for (links of session.links; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/session-link', links.id, 'view']">{{ links.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.classroom">Classroom</span></dt>
+          <dd>
+            @if (session.classroom) {
+              <div>
+                <a [routerLink]="['/classroom', session.classroom.id, 'view']">{{ session.classroom.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.type">Type</span></dt>
+          <dd>
+            @if (session.type) {
+              <div>
+                <a [routerLink]="['/session-type', session.type.id, 'view']">{{ session.type.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.mode">Mode</span></dt>
+          <dd>
+            @if (session.mode) {
+              <div>
+                <a [routerLink]="['/session-mode', session.mode.id, 'view']">{{ session.mode.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.part">Part</span></dt>
+          <dd>
+            @if (session.part) {
+              <div>
+                <a [routerLink]="['/part', session.part.id, 'view']">{{ session.part.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.jmode">Jmode</span></dt>
+          <dd>
+            @if (session.jmode) {
+              <div>
+                <a [routerLink]="['/session-join-mode', session.jmode.id, 'view']">{{ session.jmode.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.session.group">Group</span></dt>
+          <dd>
+            @if (session.group) {
+              <div>
+                <a [routerLink]="['/group', session.group.id, 'view']">{{ session.group.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/session', session.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

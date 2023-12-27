@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20231225112846"
+  },
+  "applications": "*",
+  "entityTableName": "diploma_type",
+  "fields": [
+    {
+      "fieldName": "titleAr",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "titleLat",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    }
+  ],
+  "name": "DiplomaType",
+  "relationships": [
+    {
+      "otherEntityName": "diploma",
+      "otherEntityRelationshipName": "diplomaType",
+      "relationshipName": "diploma",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ]
+}

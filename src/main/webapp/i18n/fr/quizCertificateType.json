@@ -1,0 +1,27 @@
+{
+  "wiamLmsApplicationApp": {
+    "quizCertificateType": {
+      "home": {
+        "title": "QuizCertificateTypes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Quiz Certificate Type",
+        "createOrEditLabel": "Créer ou éditer un Quiz Certificate Type",
+        "search": "Recherche pour Quiz Certificate Type",
+        "notFound": "Aucun Quiz Certificate Type trouvé"
+      },
+      "created": "Un nouveau Quiz Certificate Type a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Quiz Certificate Type avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Quiz Certificate Type avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Quiz Certificate Type {{ id }} ?"
+      },
+      "detail": {
+        "title": "Quiz Certificate Type"
+      },
+      "id": "ID",
+      "titleAr": "Title Ar",
+      "titleLat": "Title Lat",
+      "quizCertificate": "Quiz Certificate"
+    }
+  }
+}

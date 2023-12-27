@@ -1,0 +1,31 @@
+{
+  "wiamLmsApplicationApp": {
+    "answer": {
+      "home": {
+        "title": "Answers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Answer",
+        "createOrEditLabel": "Create or edit a Answer",
+        "search": "Search for Answer",
+        "notFound": "No Answers found"
+      },
+      "created": "A new Answer is created with identifier {{ param }}",
+      "updated": "A Answer is updated with identifier {{ param }}",
+      "deleted": "A Answer is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Answer {{ id }}?"
+      },
+      "detail": {
+        "title": "Answer"
+      },
+      "id": "ID",
+      "a1v": "A 1 V",
+      "a2v": "A 2 V",
+      "a3v": "A 3 V",
+      "a4v": "A 4 V",
+      "result": "Result",
+      "question": "Question",
+      "student": "Student"
+    }
+  }
+}

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Session.
+    -->
+    <changeSet id="20231225114646-1" author="jhipster">
+        <createTable tableName="session">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1500">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(500)">
+                <constraints nullable="true" />
+            </column>
+            <column name="session_start_time" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="session_end_time" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="is_active" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="session_size" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="price" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="targeted_age" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="targeted_gender" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="thumbnail" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="thumbnail_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="planning_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="once_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="monday" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="tuesday" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="wednesday" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="thursday" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="friday" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="saturday" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="sanday" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="period_start_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="periode_end_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="no_periode_end_date" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="classroom_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="mode_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="part_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="jmode_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="session" columnName="session_start_time" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="session" columnName="session_end_time" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="session" columnName="once_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="20231225114646-1-relations" author="jhipster">
+
+        <createTable tableName="rel_session__professors">
+            <column name="professors_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="session_id, professors_id" tableName="rel_session__professors"/>
+
+        <createTable tableName="rel_session__employees">
+            <column name="employees_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="session_id, employees_id" tableName="rel_session__employees"/>
+
+        <createTable tableName="rel_session__links">
+            <column name="links_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="session_id, links_id" tableName="rel_session__links"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20231225114646-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/session.csv"
+                  separator=";"
+                  tableName="session"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="title" type="string"/>
+            <column name="description" type="string"/>
+            <column name="session_start_time" type="date"/>
+            <column name="session_end_time" type="date"/>
+            <column name="is_active" type="boolean"/>
+            <column name="session_size" type="numeric"/>
+            <column name="price" type="numeric"/>
+            <column name="currency" type="string"/>
+            <column name="targeted_age" type="string"/>
+            <column name="targeted_gender" type="boolean"/>
+            <column name="thumbnail" type="blob"/>
+            <column name="thumbnail_content_type" type="string"/>
+            <column name="planning_type" type="string"/>
+            <column name="once_date" type="date"/>
+            <column name="monday" type="boolean"/>
+            <column name="tuesday" type="boolean"/>
+            <column name="wednesday" type="boolean"/>
+            <column name="thursday" type="boolean"/>
+            <column name="friday" type="boolean"/>
+            <column name="saturday" type="boolean"/>
+            <column name="sanday" type="boolean"/>
+            <column name="period_start_date" type="date"/>
+            <column name="periode_end_date" type="date"/>
+            <column name="no_periode_end_date" type="boolean"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-question-2-heading"
+        data-cy="Question2CreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.question2.home.createOrEditLabel"
+      >
+        Create or edit a Question 2
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question2.questionTitle" for="field_questionTitle"
+            >Question Title</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionTitle"
+            id="field_questionTitle"
+            data-cy="questionTitle"
+            formControlName="questionTitle"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question2.questionType" for="field_questionType"
+            >Question Type</label
+          >
+          <select class="form-control" name="questionType" formControlName="questionType" id="field_questionType" data-cy="questionType">
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.QuestionType.null' | translate }}</option>
+            @for (questionType of questionTypeValues; track $index) {
+              <option [value]="questionType">{{ 'wiamLmsApplicationApp.QuestionType.' + questionType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question2.questionDescription" for="field_questionDescription"
+            >Question Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionDescription"
+            id="field_questionDescription"
+            data-cy="questionDescription"
+            formControlName="questionDescription"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question2.questionPoint" for="field_questionPoint"
+            >Question Point</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="questionPoint"
+            id="field_questionPoint"
+            data-cy="questionPoint"
+            formControlName="questionPoint"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question2.questionSubject" for="field_questionSubject"
+            >Question Subject</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionSubject"
+            id="field_questionSubject"
+            data-cy="questionSubject"
+            formControlName="questionSubject"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.question2.questionStatus" for="field_questionStatus"
+            >Question Status</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionStatus"
+            id="field_questionStatus"
+            data-cy="questionStatus"
+            formControlName="questionStatus"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

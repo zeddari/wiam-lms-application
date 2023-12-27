@@ -1,0 +1,30 @@
+{
+  "wiamLmsApplicationApp": {
+    "question2": {
+      "home": {
+        "title": "Question2s",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Question 2",
+        "createOrEditLabel": "Créer ou éditer un Question 2",
+        "search": "Recherche pour Question 2",
+        "notFound": "Aucun Question 2 trouvé"
+      },
+      "created": "Un nouveau Question 2 a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Question 2 avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Question 2 avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Question 2 {{ id }} ?"
+      },
+      "detail": {
+        "title": "Question 2"
+      },
+      "id": "ID",
+      "questionTitle": "Question Title",
+      "questionType": "Question Type",
+      "questionDescription": "Question Description",
+      "questionPoint": "Question Point",
+      "questionSubject": "Question Subject",
+      "questionStatus": "Question Status"
+    }
+  }
+}

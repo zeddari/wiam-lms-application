@@ -1,0 +1,33 @@
+{
+  "wiamLmsApplicationApp": {
+    "diploma": {
+      "home": {
+        "title": "Diplomas",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Diploma",
+        "createOrEditLabel": "Créer ou éditer un Diploma",
+        "search": "Recherche pour Diploma",
+        "notFound": "Aucun Diploma trouvé"
+      },
+      "created": "Un nouveau Diploma a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Diploma avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Diploma avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Diploma {{ id }} ?"
+      },
+      "detail": {
+        "title": "Diploma"
+      },
+      "id": "ID",
+      "title": "Title",
+      "subject": "Subject",
+      "detail": "Detail",
+      "supervisor": "Supervisor",
+      "grade": "Grade",
+      "graduationDate": "Graduation Date",
+      "school": "School",
+      "userCustom": "User Custom",
+      "diplomaType": "Diploma Type"
+    }
+  }
+}

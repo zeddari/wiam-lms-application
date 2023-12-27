@@ -1,0 +1,29 @@
+{
+  "wiamLmsApplicationApp": {
+    "sessionLink": {
+      "home": {
+        "title": "SessionLinks",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Session Link",
+        "createOrEditLabel": "Créer ou éditer un Session Link",
+        "search": "Recherche pour Session Link",
+        "notFound": "Aucun Session Link trouvé"
+      },
+      "created": "Un nouveau Session Link a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Session Link avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Session Link avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Session Link {{ id }} ?"
+      },
+      "detail": {
+        "title": "Session Link"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "link": "Link",
+      "provider": "Provider",
+      "session": "Session"
+    }
+  }
+}

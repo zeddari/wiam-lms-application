@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20231225111746"
+  },
+  "applications": "*",
+  "entityTableName": "site",
+  "fields": [
+    {
+      "fieldName": "nameAr",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "nameLat",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "localisation",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Site",
+  "relationships": [
+    {
+      "otherEntityName": "classroom",
+      "otherEntityRelationshipName": "site",
+      "relationshipName": "classroom",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "city",
+      "relationshipName": "city",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ]
+}

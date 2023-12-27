@@ -1,0 +1,35 @@
+{
+  "wiamLmsApplicationApp": {
+    "professor": {
+      "home": {
+        "title": "Professors",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Professor",
+        "createOrEditLabel": "Créer ou éditer un Professor",
+        "search": "Recherche pour Professor",
+        "notFound": "Aucun Professor trouvé"
+      },
+      "created": "Un nouveau Professor a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Professor avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Professor avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Professor {{ id }} ?"
+      },
+      "detail": {
+        "title": "Professor"
+      },
+      "id": "ID",
+      "phoneNumber": "Phone Number",
+      "mobileNumber": "Mobile Number",
+      "gender": "Gender",
+      "about": "About",
+      "imageLink": "Image Link",
+      "code": "Code",
+      "birthdate": "Birthdate",
+      "lastDegree": "Last Degree",
+      "userCustom": "User Custom",
+      "course": "Course",
+      "session": "Session"
+    }
+  }
+}

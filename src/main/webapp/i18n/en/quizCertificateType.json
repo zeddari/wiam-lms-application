@@ -1,0 +1,27 @@
+{
+  "wiamLmsApplicationApp": {
+    "quizCertificateType": {
+      "home": {
+        "title": "Quiz Certificate Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Quiz Certificate Type",
+        "createOrEditLabel": "Create or edit a Quiz Certificate Type",
+        "search": "Search for Quiz Certificate Type",
+        "notFound": "No Quiz Certificate Types found"
+      },
+      "created": "A new Quiz Certificate Type is created with identifier {{ param }}",
+      "updated": "A Quiz Certificate Type is updated with identifier {{ param }}",
+      "deleted": "A Quiz Certificate Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Quiz Certificate Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Quiz Certificate Type"
+      },
+      "id": "ID",
+      "titleAr": "Title Ar",
+      "titleLat": "Title Lat",
+      "quizCertificate": "Quiz Certificate"
+    }
+  }
+}

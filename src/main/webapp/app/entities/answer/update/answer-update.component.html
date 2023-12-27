@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-answer-heading" data-cy="AnswerCreateUpdateHeading" jhiTranslate="wiamLmsApplicationApp.answer.home.createOrEditLabel">
+        Create or edit a Answer
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.answer.a1v" for="field_a1v">A 1 V</label>
+          <input type="checkbox" class="form-check" name="a1v" id="field_a1v" data-cy="a1v" formControlName="a1v" />
+          @if (editForm.get('a1v')!.invalid && (editForm.get('a1v')!.dirty || editForm.get('a1v')!.touched)) {
+            <div>
+              @if (editForm.get('a1v')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.answer.a2v" for="field_a2v">A 2 V</label>
+          <input type="checkbox" class="form-check" name="a2v" id="field_a2v" data-cy="a2v" formControlName="a2v" />
+          @if (editForm.get('a2v')!.invalid && (editForm.get('a2v')!.dirty || editForm.get('a2v')!.touched)) {
+            <div>
+              @if (editForm.get('a2v')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.answer.a3v" for="field_a3v">A 3 V</label>
+          <input type="checkbox" class="form-check" name="a3v" id="field_a3v" data-cy="a3v" formControlName="a3v" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.answer.a4v" for="field_a4v">A 4 V</label>
+          <input type="checkbox" class="form-check" name="a4v" id="field_a4v" data-cy="a4v" formControlName="a4v" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.answer.result" for="field_result">Result</label>
+          <input type="checkbox" class="form-check" name="result" id="field_result" data-cy="result" formControlName="result" />
+          @if (editForm.get('result')!.invalid && (editForm.get('result')!.dirty || editForm.get('result')!.touched)) {
+            <div>
+              @if (editForm.get('result')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.answer.question" for="field_question">Question</label>
+          <select
+            class="form-control"
+            id="field_question"
+            data-cy="question"
+            name="question"
+            formControlName="question"
+            [compareWith]="compareQuestion"
+          >
+            <option [ngValue]="null"></option>
+            @for (questionOption of questionsSharedCollection; track $index) {
+              <option [ngValue]="questionOption">{{ questionOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.answer.student" for="field_student">Student</label>
+          <select
+            class="form-control"
+            id="field_student"
+            data-cy="student"
+            name="student"
+            formControlName="student"
+            [compareWith]="compareStudent"
+          >
+            <option [ngValue]="null"></option>
+            @for (studentOption of studentsSharedCollection; track $index) {
+              <option [ngValue]="studentOption">{{ studentOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "wiamLmsApplicationApp": {
+    "ticketSubjects": {
+      "home": {
+        "title": "TicketSubjects",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Ticket Subjects",
+        "createOrEditLabel": "Créer ou éditer un Ticket Subjects",
+        "search": "Recherche pour Ticket Subjects",
+        "notFound": "Aucun Ticket Subjects trouvé"
+      },
+      "created": "Un nouveau Ticket Subjects a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ticket Subjects avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ticket Subjects avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Ticket Subjects {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ticket Subjects"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "tickets": "Tickets"
+    }
+  }
+}

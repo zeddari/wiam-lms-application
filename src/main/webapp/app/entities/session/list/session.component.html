@@ -1,0 +1,427 @@
+<div>
+  <h2 id="page-heading" data-cy="SessionHeading">
+    <span jhiTranslate="wiamLmsApplicationApp.session.home.title">Sessions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="wiamLmsApplicationApp.session.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-session"
+        [routerLink]="['/session/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="wiamLmsApplicationApp.session.home.createLabel">Create a new Session</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="wiamLmsApplicationApp.session.home.search"
+          >Search for Session</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'wiamLmsApplicationApp.session.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (sessions?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="wiamLmsApplicationApp.session.home.notFound">No Sessions found</span>
+    </div>
+  }
+
+  @if (sessions && sessions.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.title">Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sessionStartTime">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.sessionStartTime">Session Start Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sessionEndTime">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.sessionEndTime">Session End Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sessionSize">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.sessionSize">Session Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="price">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.price">Price</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currency">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.currency">Currency</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="targetedAge">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.targetedAge">Targeted Age</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="targetedGender">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.targetedGender">Targeted Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="thumbnail">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.thumbnail">Thumbnail</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="planningType">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.planningType">Planning Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="onceDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.onceDate">Once Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="monday">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.monday">Monday</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tuesday">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.tuesday">Tuesday</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="wednesday">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.wednesday">Wednesday</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="thursday">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.thursday">Thursday</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="friday">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.friday">Friday</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="saturday">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.saturday">Saturday</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sanday">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.sanday">Sanday</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="periodStartDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.periodStartDate">Period Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="periodeEndDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.periodeEndDate">Periode End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="noPeriodeEndDate">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.noPeriodeEndDate">No Periode End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="professors.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.professors">Professors</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="employees.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.employees">Employees</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="links.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.links">Links</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="classroom.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.classroom">Classroom</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.type">Type</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mode.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.mode">Mode</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="part.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.part">Part</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="jmode.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.jmode">Jmode</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="group.id">
+              <div class="d-flex">
+                <span jhiTranslate="wiamLmsApplicationApp.session.group">Group</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (session of sessions; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/session', session.id, 'view']">{{ session.id }}</a>
+              </td>
+              <td>{{ session.title }}</td>
+              <td>{{ session.description }}</td>
+              <td>{{ session.sessionStartTime | formatMediumDatetime }}</td>
+              <td>{{ session.sessionEndTime | formatMediumDatetime }}</td>
+              <td>{{ session.isActive }}</td>
+              <td>{{ session.sessionSize }}</td>
+              <td>{{ session.price }}</td>
+              <td>{{ session.currency }}</td>
+              <td>{{ session.targetedAge }}</td>
+              <td>{{ session.targetedGender }}</td>
+              <td>
+                @if (session.thumbnail) {
+                  <a (click)="openFile(session.thumbnail, session.thumbnailContentType)">
+                    <img
+                      [src]="'data:' + session.thumbnailContentType + ';base64,' + session.thumbnail"
+                      style="max-height: 30px"
+                      alt="session image"
+                    />
+                  </a>
+                  <span>{{ session.thumbnailContentType }}, {{ byteSize(session.thumbnail) }}</span>
+                }
+              </td>
+              <td>{{ session.planningType }}</td>
+              <td>{{ session.onceDate | formatMediumDatetime }}</td>
+              <td>{{ session.monday }}</td>
+              <td>{{ session.tuesday }}</td>
+              <td>{{ session.wednesday }}</td>
+              <td>{{ session.thursday }}</td>
+              <td>{{ session.friday }}</td>
+              <td>{{ session.saturday }}</td>
+              <td>{{ session.sanday }}</td>
+              <td>{{ session.periodStartDate | formatMediumDate }}</td>
+              <td>{{ session.periodeEndDate | formatMediumDate }}</td>
+              <td>{{ session.noPeriodeEndDate }}</td>
+              <td>
+                @for (professors of session.professors; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/professor', professors.id, 'view']">{{ professors.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (employees of session.employees; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/employee', employees.id, 'view']">{{ employees.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (links of session.links; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/session-link', links.id, 'view']">{{ links.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @if (session.classroom) {
+                  <div>
+                    <a [routerLink]="['/classroom', session.classroom.id, 'view']">{{ session.classroom.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (session.type) {
+                  <div>
+                    <a [routerLink]="['/session-type', session.type.id, 'view']">{{ session.type.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (session.mode) {
+                  <div>
+                    <a [routerLink]="['/session-mode', session.mode.id, 'view']">{{ session.mode.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (session.part) {
+                  <div>
+                    <a [routerLink]="['/part', session.part.id, 'view']">{{ session.part.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (session.jmode) {
+                  <div>
+                    <a [routerLink]="['/session-join-mode', session.jmode.id, 'view']">{{ session.jmode.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (session.group) {
+                  <div>
+                    <a [routerLink]="['/group', session.group.id, 'view']">{{ session.group.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/session', session.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/session', session.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(session)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,146 @@
+package com.wiam.lms.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+/**
+ * A TicketSubjects.
+ */
+@Entity
+@Table(name = "ticket_subjects")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "ticketsubjects")
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class TicketSubjects implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @NotNull
+    @Size(max = 100)
+    @Column(name = "title", length = 100, nullable = false)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
+    private String title;
+
+    @Size(max = 500)
+    @Column(name = "description", length = 500)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
+    private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @org.springframework.data.annotation.Transient
+    @JsonIgnoreProperties(value = { "userCustom", "subject" }, allowSetters = true)
+    private Set<Tickets> tickets = new HashSet<>();
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public TicketSubjects id(Long id) {
+        this.setId(id);
+        return this;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public TicketSubjects title(String title) {
+        this.setTitle(title);
+        return this;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public TicketSubjects description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<Tickets> getTickets() {
+        return this.tickets;
+    }
+
+    public void setTickets(Set<Tickets> tickets) {
+        if (this.tickets != null) {
+            this.tickets.forEach(i -> i.setSubject(null));
+        }
+        if (tickets != null) {
+            tickets.forEach(i -> i.setSubject(this));
+        }
+        this.tickets = tickets;
+    }
+
+    public TicketSubjects tickets(Set<Tickets> tickets) {
+        this.setTickets(tickets);
+        return this;
+    }
+
+    public TicketSubjects addTickets(Tickets tickets) {
+        this.tickets.add(tickets);
+        tickets.setSubject(this);
+        return this;
+    }
+
+    public TicketSubjects removeTickets(Tickets tickets) {
+        this.tickets.remove(tickets);
+        tickets.setSubject(null);
+        return this;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TicketSubjects)) {
+            return false;
+        }
+        return getId() != null && getId().equals(((TicketSubjects) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "TicketSubjects{" +
+            "id=" + getId() +
+            ", title='" + getTitle() + "'" +
+            ", description='" + getDescription() + "'" +
+            "}";
+    }
+}

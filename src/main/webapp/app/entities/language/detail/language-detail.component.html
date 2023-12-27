@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (language) {
+      <div>
+        <h2 data-cy="languageDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.language.detail.title">Language</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="wiamLmsApplicationApp.language.id">Id</span></dt>
+          <dd>
+            <span>{{ language.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.language.label">Label</span></dt>
+          <dd>
+            <span>{{ language.label }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.language.userCustom">User Custom</span></dt>
+          <dd>
+            @if (language.userCustom) {
+              <div>
+                <a [routerLink]="['/user-custom', language.userCustom.id, 'view']">{{ language.userCustom.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/language', language.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

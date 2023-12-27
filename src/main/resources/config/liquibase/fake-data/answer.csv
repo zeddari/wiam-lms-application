@@ -1,0 +1,11 @@
+id;a_1_v;a_2_v;a_3_v;a_4_v;result
+1;true;false;true;false;true
+2;false;true;false;true;true
+3;false;true;false;false;true
+4;true;true;true;true;false
+5;false;true;true;false;false
+6;false;true;true;false;true
+7;true;false;false;false;false
+8;false;true;true;true;false
+9;false;true;true;false;true
+10;false;true;true;false;true

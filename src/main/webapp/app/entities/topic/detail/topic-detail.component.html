@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (topic) {
+      <div>
+        <h2 data-cy="topicDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.topic.detail.title">Topic</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ topic.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.topic.titleAr">Title Ar</span></dt>
+          <dd>
+            <span>{{ topic.titleAr }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.topic.titleLat">Title Lat</span></dt>
+          <dd>
+            <span>{{ topic.titleLat }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.topic.description">Description</span></dt>
+          <dd>
+            <span>{{ topic.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.topic.topic2">Topic 2</span></dt>
+          <dd>
+            @if (topic.topic2) {
+              <div>
+                <a [routerLink]="['/topic', topic.topic2.id, 'view']">{{ topic.topic2.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/topic', topic.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

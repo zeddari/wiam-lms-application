@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (student) {
+      <div>
+        <h2 data-cy="studentDetailsHeading"><span jhiTranslate="wiamLmsApplicationApp.student.detail.title">Student</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ student.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ student.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.mobileNumber">Mobile Number</span></dt>
+          <dd>
+            <span>{{ student.mobileNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.gender">Gender</span></dt>
+          <dd>
+            <span>{{ student.gender }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.about">About</span></dt>
+          <dd>
+            <span>{{ student.about }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.imageLink">Image Link</span></dt>
+          <dd>
+            @if (student.imageLink) {
+              <div>
+                <a (click)="openFile(student.imageLink, student.imageLinkContentType)">
+                  <img
+                    [src]="'data:' + student.imageLinkContentType + ';base64,' + student.imageLink"
+                    style="max-width: 100%"
+                    alt="student image"
+                  />
+                </a>
+                {{ student.imageLinkContentType }}, {{ byteSize(student.imageLink) }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.code">Code</span></dt>
+          <dd>
+            <span>{{ student.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.birthdate">Birthdate</span></dt>
+          <dd>
+            <span>{{ student.birthdate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.lastDegree">Last Degree</span></dt>
+          <dd>
+            <span>{{ student.lastDegree }}</span>
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.userCustom">User Custom</span></dt>
+          <dd>
+            @if (student.userCustom) {
+              <div>
+                <a [routerLink]="['/user-custom', student.userCustom.id, 'view']">{{ student.userCustom.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.group2">Group 2</span></dt>
+          <dd>
+            @if (student.group2) {
+              <div>
+                <a [routerLink]="['/group', student.group2.id, 'view']">{{ student.group2.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="wiamLmsApplicationApp.student.country">Country</span></dt>
+          <dd>
+            @if (student.country) {
+              <div>
+                <a [routerLink]="['/country', student.country.id, 'view']">{{ student.country.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/student', student.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-certificate-heading"
+        data-cy="CertificateCreateUpdateHeading"
+        jhiTranslate="wiamLmsApplicationApp.certificate.home.createOrEditLabel"
+      >
+        Create or edit a Certificate
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.certificate.coteryName" for="field_coteryName">Cotery Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="coteryName"
+            id="field_coteryName"
+            data-cy="coteryName"
+            formControlName="coteryName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.certificate.studentFullName" for="field_studentFullName"
+            >Student Full Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="studentFullName"
+            id="field_studentFullName"
+            data-cy="studentFullName"
+            formControlName="studentFullName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.certificate.certificateType" for="field_certificateType"
+            >Certificate Type</label
+          >
+          <select
+            class="form-control"
+            name="certificateType"
+            formControlName="certificateType"
+            id="field_certificateType"
+            data-cy="certificateType"
+          >
+            <option [ngValue]="null">{{ 'wiamLmsApplicationApp.CertificateType.null' | translate }}</option>
+            @for (certificateType of certificateTypeValues; track $index) {
+              <option [value]="certificateType">{{ 'wiamLmsApplicationApp.CertificateType.' + certificateType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.certificate.student" for="field_student">Student</label>
+          <select
+            class="form-control"
+            id="field_student"
+            data-cy="student"
+            name="student"
+            formControlName="student"
+            [compareWith]="compareStudent"
+          >
+            <option [ngValue]="null"></option>
+            @for (studentOption of studentsSharedCollection; track $index) {
+              <option [ngValue]="studentOption">{{ studentOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="wiamLmsApplicationApp.certificate.cotery" for="field_cotery">Cotery</label>
+          <select
+            class="form-control"
+            id="field_cotery"
+            data-cy="cotery"
+            name="cotery"
+            formControlName="cotery"
+            [compareWith]="compareCotery"
+          >
+            <option [ngValue]="null"></option>
+            @for (coteryOption of coteriesSharedCollection; track $index) {
+              <option [ngValue]="coteryOption">{{ coteryOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

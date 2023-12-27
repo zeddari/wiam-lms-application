@@ -1,0 +1,22 @@
+{
+  "annotations": {
+    "changelogDate": "20231225111246"
+  },
+  "applications": "*",
+  "entityTableName": "country_2",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "countryName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "name": "Country2",
+  "relationships": []
+}
